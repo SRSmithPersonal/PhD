@@ -1,0 +1,100 @@
+\chapter{Background theory}
+\label{chp:Theory}
+
+Light that has interacted with a material contains information about the material. The extraction of this data necessitates an understanding of how light and matter interact. Light interacting with dielectric materials undergoes several changes that will be discussed in the following sections.
+
+\section{Polarization}
+\label{sec:Pol}
+
+Transverse waves, such as electric fields, oscillate perpendicular to the direction of propagation. The orientation of this oscillation, relative to the plane of incidence, is known as the polarization. The polarization can be broken up into two components, s- and p-polarization, where s- refers to the component of the wave oscillating perpendicular to the plane of incidence and p- refers to the component of the wave oscillating parallel to the plane of incidence.
+
+A phase-delay between the s- and p-polarized components of a transverse wave leads to the oscillations precessing around the central axis of the wave, thus leading to what is known as circular or elliptic polarization.
+
+\section{Fresnel Equations}
+\label{sec:Fresnel}
+
+At the interface between two materials with different refractive indexes, a fraction of incident light is reflected and a fraction is transmitted. The ratio of the electric field that is reflected and transmitted is described by the Fresnel equations. The ratio can be broken up into reflection and transmission coefficients. These coefficients are polarization dependent, with different coefficients for the p- and s-polarization.\cite{Driscoll-1978}
+%TODO: Add continuety comment
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/FresnelDiag.png}
+	 \caption{Diagram depicting the interaction of light at the interface between two media with different refractive indexes. A fraction of incident light is reflected and a fraction is transmitted into the second sample.}
+   \label{fig:FresRef}
+\end{center}
+\end{figure}
+
+\begin{eqnarray}
+r_{p} &=& \frac{\widetilde{n}_{i}\cos{\theta_{t}} - \widetilde{n}_{t}\cos{\theta_{i}}}{\widetilde{n}_{i}\cos{\theta_{t}} + \widetilde{n}_{t}\cos{\theta_{i}}}\label{eq:FresnelRP}\\
+r_{s} &=& \frac{\widetilde{n}_{i}\cos{\theta_{i}} - \widetilde{n}_{t}\cos{\theta_{t}}}{\widetilde{n}_{i}\cos{\theta_{i}} + \widetilde{n}_{t}\cos{\theta_{t}}}\label{eq:FresnelRS}\\
+t_{p} &=& \frac{2\widetilde{n}_{i}\cos{\theta_{i}}}{\widetilde{n}_{i}\cos{\theta_{t}} + \widetilde{n}_{t}\cos{\theta_{i}}}\label{eq:FresnelTP}\\
+t_{s} &=& \frac{2\widetilde{n}_{i}\cos{\theta_{i}}}{\widetilde{n}_{i}\cos{\theta_{i}} + \widetilde{n}_{t}\cos{\theta_{t}}}\label{eq:FresnelTS}
+\end{eqnarray}
+
+where $r_{p}$ and $t_{p}$ are the reflection and transmission coefficients for the p-polarized component of the the incident electric field and $r_{s}$ and $t_{s}$ are the reflection and transmission coefficients for the s-polarized component of the the incident electric field. The complex refractive index of the first medium is represented by $\widetilde{n}_{i}$ and the complex refractive index of the second medium is represented by $\widetilde{n}_{t}$, while $theta_{i}$ represents the angle at which the wave is incident on the interface between the two media and $theta_{t}$ represents the angle at which the wave propagates through the second medium.
+
+From the Fresnel equations (equations \ref{eq:FresnelRP} - \ref{eq:FresnelTS}) it is found that at a specific angle of incidence, for a given material
+the reflection coefficient for p-polarized light becomes $0$ while the reflection coefficient for s-polarized light is a non-zero amount. Thus there will be a loss to s-polarized light transmitted through this material, but not p-polarized light. This angle is known as the Brewster angle.
+
+\begin{equation}
+\tan{\theta_{B}} = \frac{n_{2}}{n_{1}}
+\label{eq:Brewster}
+\end{equation}
+
+where $\theta_{B}$ is the Brewster angle.\cite{Griffiths-2008}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/BrewsterRef2.png}
+	 \caption{The s- and p-reflection coefficients for high resistivity silicon as a function of the angle of incidence.}
+   \label{fig:BrewRef}
+\end{center}
+\end{figure}
+It should be noted that where the reflection coefficients are negative, it indicates that the reflected electric field will undergo a $\pi$-phase shift, which can be seen in the time domain as an inversion of the electric field.
+
+\section{Snell's Laws}
+\label{sec:Snell}
+Snell's laws describe how the direction of propagation changes for light at the interface between two dielectric media.
+
+Snell's 1st law states that the incident, reflected and transmitted wave vectors form a plane. This plane is known as the plane of incidence.
+
+Snell's 2nd law states that the angle at which light reflects off the surface of a material is equal to the angle of incidence.
+
+Snell's 2nd law:
+\begin{equation}
+\theta_{R} = \theta_{I}
+\label{eq:Snell2}
+\end{equation}
+
+Snell's 3rd law states that light transmitted through the interface between two dielectric materials with different refractive indexes undergoes a change in propagation direction. The transmitted angle is dependent on the ratio between the refractive indexes of the two materials and the angle at which light is incident on the interface.
+
+Snell's 3rd law:
+\begin{eqnarray}
+n_{1}\sin{\theta_{I}} &=& n_{2}\sin{\theta_{T}}\\
+\theta_{T} &=& \sin^{-1}{\left(\frac{n_{1}}{n_{2}}\sin{\theta_{I}}\right)}
+\label{eq:Snell3}
+\end{eqnarray}
+%\pagebreak
+
+\section{Complex refractive index}
+\label{sec:Attenuation}
+
+The complex refractive index describes how light propagates through a medium. The complex refractive index consists of two components, the real refractive index, $n$, and the extinction coefficient, $\kappa$.
+\begin{equation}
+\widetilde{n}  = n - i\kappa
+\label{eq:compref}
+\end{equation}
+%TODO: def wave vector k
+Light traveling through a dielectric medium propagates slower compared to vacuum. The propagation speed is inversely proportional to the real refractive index of the medium. The electric field undergoes attenuation as it propagates through the medium. This attenuation is proportion to the extinction coefficient of the material.
+%TODO: check vergelyking vir E field deur medium
+\begin{eqnarray}
+E_{i}(t) &=& E_{0}e^{i(\omega t - kx)}\label{eq:Travel11}\\
+E_{t}(t) &=& E_{0}e^{i(\omega t - kx - \frac{2\pi nfd}{c})}e^{-2\pi\frac{f\kappa d}{c}}\label{eq:Travel21}\\
+&=& A\, E_{0}(t)\label{eq:Travel31}\\
+A &=& e^{\frac{-2i\pi f\widetilde{n}d}{c}}\label{eq:Travel41}
+\end{eqnarray}
+
+In equation \ref{eq:Travel21} $E_{t}$ is the electric field after having traveled through the medium and $E_{0}$ is the initial electric field, $d$ is the distance the light travels through the medium, $n$ is the real refractive index of the medium and $\kappa$ is the extinction coefficient of the medium.
+
+
+%----------------------------------------------------------------------------
+\endinput
