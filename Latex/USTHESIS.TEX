@@ -1,0 +1,153 @@
+\documentclass[12pt,oneside,openany,a4paper,%..... Layout
+               afrikaans, english,%.............. Global language selection
+               ]{memoir}
+
+ \usepackage[masters-t,%.......................... Master thesis
+             goldenblock,%........................ A5 type block (or a5block or wide)
+            ]{usthesis}%.......................... US thesis style with memoir
+
+%
+% PLEASE read the USthesis documentation for the class options
+% and how to set line and paragraph spacing
+%
+ \usepackage{float}
+ \usepackage{url} 
+ \usepackage{caption}
+%==== Language setup ================================================
+ \usepackage[latin1]{inputenc}%................... Recognizes ê, ë, etc
+ \usepackage{babel}%.............................. Language setup
+
+%==== Math setup ====================================================
+ \usepackage{amsmath}%............................ Advanced math (before fonts)
+ %\usepackage{amssymb}%............................ AMS Symbol fonts
+
+%==== Font setup (default is Computer Modern) =======================
+ \usepackage[T1]{fontenc}%........................ Type 1 fonts
+ %\usepackage{fourier}
+ \usepackage{textcomp}%........................... Additional text character
+ \usepackage{bm}%................................. Bold math symbols (after fonts)
+
+%==== Ref's, Bib's and Nomencl ======================================
+ \usepackage{usnomencl}%.......................... List of symbols (in usthesis pack)
+ \usepackage{usbib}%.............................. Bibliography    (in usthesis pack)
+    \bibliographystyle{usmeg-n}
+    \renewcommand\bibfont{\small}
+%\usepackage{cite}
+    %% For usmeg-a, the bib is a list of references. If you
+    %% are using usmeg-n comment out the following lines
+   % \addto{\captionsafrikaans}{\renewcommand{\bibname}{Lys van Verwysings}}
+    %\addto{\captionsenglish}{\renewcommand{\bibname}{List of References}}
+%==== Graphics and Color ============================================
+\usepackage{graphicx}%........................... Graphicx loaded in usthesis
+\usepackage{color}%.............................. Color setup
+\usepackage{eso-pic}%............................ Shipout commands for watermark
+    \newcommand*{\WaterMark}[2][0.2\paperwidth]{%
+        \AddToShipoutPicture*{\AtTextCenter{%
+                \parbox[c]{0pt}{\makebox[0pt][c]{%
+                    \includegraphics[width=#1]{#2}}}}}}
+
+%==== Local Defs ====================================================
+\makeatletter
+
+%
+% Please insert user defined commands here
+% and NOT in the document itself!
+%
+
+\makeatother
+
+%==== TITLE PAGE ====================================================
+\title{\bfseries
+       \AorE{%-- Afrikaans ------------------------------------------
+             Ontwikkeling en karakterisering van 'n tyd verwante multi-antenna terahertz spektroskopie sisteem\\[1ex]
+             \normalfont\small\itshape
+             (``Construction of a spectroscopic terahertz time-domain ellipsometer'')
+            }{%-- English -------------------------------------------
+             Construction of a spectroscopic terahertz time-domain ellipsometer
+            }}
+
+\author{S.R.\ Smith}{Shane Raymond Smith}
+
+\degree{\AorE{MSc (Physics)}{MSc (Fisika)}}
+       {\AorE{Doktoraat in die Natuurwetenskappe in Laser Fisika}
+             {PhD of Science in Laser Physics}}
+
+\address{\AorE{%-- Afrikaans ----------------------------------------
+        Departement Fisika,\\
+        Universiteit Stellenbosch,\\
+        Privaatsak X1, Matieland 7602, Suid Afrika.%
+             }{%-- English ------------------------------------------
+        Department of Physics,\\
+        Stellenbosch University ,\\
+        Private Bag X1, Matieland 7602, South Africa.
+             }}
+\faculty{\AorE{Fakulteit Natuur Wetenskap}%
+              {Faculty of Nature Science}}
+\studyleader{Dr.\ P.H.\ Neethling\ Co-supervisor:\ Prof.\  E.G.\ Rohwer}
+\setdate{3}{2015}
+
+%====================================================================
+%     MAIN DOCUMENT
+%====================================================================
+\maxsecnumdepth{subsubsection}
+\maxtocdepth{subsection}
+
+\begin{document}
+
+%==== Front matter ==================================================
+ \frontmatter
+ \WaterMark{UScrest-WM}
+ \TitlePage
+
+ %\DeclarationSign{\includegraphics[width=2cm]{MySignatureFile}}
+ %\DeclarationDate{2010/12/10}
+ \DeclarationPage
+
+ \include{frontmatter/Chap-Front}
+
+ \tableofcontents
+ \clearpage
+
+ \setcounter{lofdepth}{2}
+ \listoffigures
+ \clearpage
+
+ \listoftables
+ \clearpage
+
+ \include{frontmatter/Nomencl}
+
+%==== Main document =================================================
+\mainmatter
+   \setsecnumdepth{subsubsection}
+   \numberwithin{equation}{section}
+   \numberwithin{figure}{chapter}
+   \numberwithin{table}{chapter}
+
+\include{contents/Intro}
+\include{contents/Theory}
+\include{contents/SETUP4}
+%\include{contents/Tera}
+\include{contents/Simulation}
+\include{contents/Data_Analysis}
+%\include{contents/ResDis2}
+\include{contents/Conclusion2}
+%==== Appendices ====================================================
+\appendix
+\appendixpage\relax
+
+%\include{contents/Auto2}
+%\include{contents/Telescope}
+%\include{contents/RLC}
+%\include{contents/Fourier}
+%\include{contents/Solvents}
+%\include{contents/Kuvet}
+
+%\include{contents/KnifeEdge}
+
+%==== Bibliography acro's & Index ===================================
+\backmatter
+
+\bibliography{backmatter/Bib}
+
+\end{document}
