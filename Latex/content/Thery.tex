@@ -1,0 +1,165 @@
+\chapter{Background theory}
+\label{chp:Theory}
+
+During the course of this p spectroscopic techniques will be used to extract information about the optical properties of materials. Spectroscopy uses light to examine materials.
+
+Light that has interacted with a material contains information about the material. The extraction of this data necessitates an understanding of how light and matter interact. Light that interacts with a dielectric material experiences absorption and changes in the phase of the wave (refraction).
+
+\section{Polarization}
+\label{sec:Pol}
+
+Transverse waves, such as light, oscillate perpendicular to the direction of propagation. The orientation of this oscillation is known as the polarization. Relative to the plane of incidence, the polarization can be broken up into two components, s- and p-polarization, where s- refers to the component of the electric field oscillating perpendicular to the plane of incidence and p- refers to the component of the electric field oscillating parallel to the plane of incidence.
+
+\section{Complex refractive index}
+\label{sec:Attenuation}
+
+The complex refractive index determines how light propagates through a medium. The complex refractive index consists of two components, the real refractive index, $n$, and the extinction coefficient, $\kappa$.
+\begin{equation}
+\widetilde{n}  = n - i\kappa
+\label{eq:compref}
+\end{equation}
+Light traveling through a dielectric medium propagates slower compared to vacuum. The propagation speed is inversely proportional to the real refractive index of the medium. The electric field also undergoes attenuation as it propagates through the medium. This attenuation is determined by the extinction coefficient of the material.
+
+\begin{eqnarray}
+E(t) &=& E_{0}e^{-i(\widetilde{k}x - 2\pi ft)}\label{eq:Travel11}\\
+\widetilde{k} &=& \frac{2\pi f \widetilde{n}}{c}\\
+\mbox{For free space:}\nonumber\\
+\widetilde{n} &=& 1\\
+E_{i}(t) &=& E_{0}e^{-i2\pi f(\frac{d}{c} - t)}\\
+\mbox{while, for a dielectric medium:}\nonumber\\
+\widetilde{n} &=& n - i\kappa\\
+E_{t}(t) &=& E_{0}e^{-i2\pi f(\frac{nd}{c} - t)}e^{-2\pi\frac{f\kappa d}{c}}\label{eq:Travel21}
+\end{eqnarray}
+
+In equation \ref{eq:Travel21}, $E_{t}(t)$ is the electric field after having traveled through a dielectric medium of thickness $d$; $E_{i}(t)$ is the electric field which has propagated a distance, $d$, through free space; $n$ is the real refractive index of the dielectric medium, and $\kappa$ is the extinction coefficient of the medium.
+The extinction coefficient, $\kappa$, is related to the absorption coefficient, $\alpha$ by the following relationship:
+
+\begin{equation}
+\kappa = \frac{\alpha c}{(4 \pi f)}
+\label{eq:abs}
+\end{equation}
+
+The attenuation and phase delay introduced by traveling through a dielectric medium is derived from equation \ref{eq:Travel21} and is compounded into a single variable, $A$.
+
+\begin{equation}
+A = e^{-i2\pi f \frac{\widetilde{n}d}{c}}
+\label{eq:Travel31}
+\end{equation}
+
+\section{Fresnel Equations}
+\label{sec:Fresnel}
+
+Light incident on the interface between two materials with different refractive indexes will undergo reflection and transmission at the interface. The ratio of the electric field that is reflected and transmitted is described by the Fresnel equations. The ratio can be reduced to reflection and transmission coefficients. These coefficients are polarization dependent, with different coefficients for the p- and s-polarization \cite{Driscoll-1978}.
+%TODO: Add continuety comment
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/FresnelDiag.png}
+	 \caption[Fresnel diagram]{Diagram depicting the interaction of light at the interface between two media with different refractive indexes. A fraction of incident light is reflected and a fraction is transmitted into the second medium.}
+   \label{fig:FresRef}
+\end{center}
+\end{figure}
+
+\begin{eqnarray}
+r_{p} &=& \frac{n_{1}\cos{\theta_{t}} - n_{2}\cos{\theta_{i}}}{n_{1}\cos{\theta_{t}} + n_{2}\cos{\theta_{i}}}\label{eq:FresnelRPr}\\
+r_{s} &=& \frac{n_{1}\cos{\theta_{i}} - n_{2}\cos{\theta_{t}}}{n_{1}\cos{\theta_{i}} + n_{2}\cos{\theta_{t}}}\label{eq:FresnelRSr}\\
+t_{p} &=& \frac{2n_{1}\cos{\theta_{i}}}{n_{1}\cos{\theta_{t}} + n_{2}\cos{\theta_{i}}}\label{eq:FresnelTPr}\\
+t_{s} &=& \frac{2n_{1}\cos{\theta_{i}}}{n_{1}\cos{\theta_{i}} + n_{2}\cos{\theta_{t}}}\label{eq:FresnelTSr}
+\end{eqnarray}
+
+In equations \ref{eq:FresnelRPr} and \ref{eq:FresnelTPr} $r_{p}$ and $t_{p}$ are the reflection and transmission coefficients for the p-polarized component of the the incident electric field and $r_{s}$ and $t_{s}$ are the reflection and transmission coefficients for the s-polarized component of the the incident electric field. The real refractive index of the first medium is represented by $n_{1}$ and the real refractive index of the second medium is represented by $n_{2}$, while $\theta_{i}$ represents the angle at which the wave is incident on the interface between the two media and $\theta_{t}$ represents the angle at which the wave refracts through the interface between the two media.
+
+From the Fresnel equations (equations \ref{eq:FresnelRPr} - \ref{eq:FresnelTSr}) it is found that at a specific angle of incidence, for a given material
+the reflection coefficient for p-polarized light becomes $0$ while the reflection coefficient for s-polarized light is non-zero. Thus there will be a loss to s-polarized light transmitted through this material, but not p-polarized light. This angle is known as the Brewster angle and can be easily calculated from equation \ref{eq:FresnelRPr},
+
+\begin{equation}
+\tan{\theta_{B}} = \frac{n_{2}}{n_{1}}
+\label{eq:Brewster}
+\end{equation}
+
+where $\theta_{B}$ is the Brewster angle \cite{Griffiths-2008}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/BrewsterRef3.png}
+	 \caption[Reflection coefficients of high resistivity silicon.]{The real part of the s- and p-reflection coefficients for high resistivity silicon as a function of the angle of incidence.}
+   \label{fig:BrewRef}
+\end{center}
+\end{figure}
+It should be noted that, in figure \ref{fig:BrewRef}, where the reflection coefficients are negative, it indicates that the reflected electric field will undergo a $\pi$-phase shift, which can be seen in the time domain as an inversion of the electric field about the time-axis.
+
+The Fresnel equations still hold true when the complex refractive index is considered, as apposed to the  real refractive index \cite{Driscoll-1978}: 
+
+\begin{eqnarray}
+\widetilde{r}_{p} &=& \frac{\widetilde{n}_{1}\cos{\widetilde{\theta}_{t}} - \widetilde{n}_{2}\cos{\widetilde{\theta}_{i}}}{\widetilde{n}_{1}\cos{\widetilde{\theta}_{t}} + \widetilde{n}_{2}\cos{\widetilde{\theta}_{i}}}\label{eq:FresnelRP}\\
+\widetilde{r}_{s} &=& \frac{\widetilde{n}_{1}\cos{\widetilde{\theta}_{i}} - \widetilde{n}_{2}\cos{\widetilde{\theta}_{t}}}{\widetilde{n}_{1}\cos{\widetilde{\theta}_{i}} + \widetilde{n}_{2}\cos{\widetilde{\theta}_{t}}}\label{eq:FresnelRS}\\
+\widetilde{t}_{p} &=& \frac{2\widetilde{n}_{1}\cos{\widetilde{\theta}_{i}}}{\widetilde{n}_{1}\cos{\widetilde{\theta_{t}}} + \widetilde{n}_{2}\cos{\widetilde{\theta}_{i}}}\label{eq:FresnelTP}\\
+\widetilde{t}_{s} &=& \frac{2\widetilde{n}_{1}\cos{\widetilde{\theta}_{i}}}{\widetilde{n}_{1}\cos{\widetilde{\theta}_{i}} + \widetilde{n}_{2}\cos{\widetilde{\theta}_{t}}}\label{eq:FresnelTS}
+\end{eqnarray}
+
+In equations \ref{eq:FresnelRP} and \ref{eq:FresnelTP} $\widetilde{r}_{p}$ and $\widetilde{t}_{p}$ are the reflection and transmission coefficients for the p-polarized component of the the incident electric field and $\widetilde{r}_{s}$ and $\widetilde{t}_{s}$ are the reflection and transmission coefficients for the s-polarized component of the the incident electric field. The complex refractive index of the first medium is represented by $\widetilde{n}_{1}$ and the complex refractive index of the second medium is represented by $\widetilde{n}_{2}$, while $\widetilde{\theta}_{i}$ represents the angle at which the wave is incident on the interface between the two media and $\widetilde{\theta}_{t}$ represents the angle at which the wave refracts through the interface between the two media, but no longer directly represents the angle of propagation through the medium \cite{Kovalenko-2001}.
+
+\section{Snell's Laws}
+\label{sec:Snell}
+Snell's laws describe how the direction of propagation changes for light at the interface between two dielectric media. These laws relate the angle of incidence ($\theta_{I}$), the angle of reflection ($\theta_{R}$) and the angle of transmission ($\theta_{T}$).
+
+Snell's 1'st law states that the incident, reflected and transmitted wave vectors all lie in the same plane. This plane is known as the plane of incidence.
+\paragraph{}
+Snell's 2'nd law describes that the angle at which light reflects off the surface of a dielectric medium is equal to the angle of incidence, as measured relative to the surface normal.
+
+Snell's 2'nd law:
+\begin{equation}
+\theta_{R} = \theta_{I}
+\label{eq:Snell2}
+\end{equation}
+
+Snell's 3'rd law describes how light transmitted through the interface between two dielectric media with different refractive indexes undergoes a change in propagation direction. The transmitted angle is dependent on the ratio between the refractive indexes of the two materials and the angle at which light is incident on the interface.
+
+Snell's 3'rd law:
+\begin{eqnarray}
+n_{1}\sin{\theta_{I}} &=& n_{2}\sin{\theta_{T}}\\
+\theta_{T} &=& \sin^{-1}{\left(\frac{n_{1}}{n_{2}}\sin{\theta_{I}}\right)}
+\label{eq:Snell3}
+\end{eqnarray}
+
+In equation \ref{eq:Snell3} the real refractive index is used. Equation \ref{eq:Snell3} does hold true if the complex refractive index is used instead \cite{Kovalenko-2001}.
+
+\begin{eqnarray}
+n_{1}\sin{\theta_{I}} &=& \widetilde{n}_{2}\sin{\widetilde{\theta}_{T}}\\
+\widetilde{\theta}_{T} &=& \sin^{-1}{\left(\frac{n_{1}}{\widetilde{n}_{2}}\sin{\theta_{I}}\right)}
+\label{eq:Snell3c}
+\end{eqnarray}
+
+In equation \ref{eq:Snell3c} the complex angle of refraction, $\widetilde{\theta}_{T}$, does not equate to the angle of propagation.
+In this case the angle of propagation can be calculated by the following equation \cite{Kovalenko-2001}:
+
+\begin{equation}
+\sin^{2}\theta_{T prop} = \frac{1}{2}\left[\left(1+\frac{n^{2}_{1}sin^{2}\theta_{I}}{n^{2}_{2} + \kappa^{2}_{2}}\right)-\sqrt{\left(1+\frac{n^{2}_{1}sin^{2}\theta_{I}}{n^{2}_{2} + \kappa^{2}_{2}}\right)^{2} - \frac{4n^{2}_{2}n^{2}_{1}sin^{2}\theta_{I}}{(n^{2}_{2} + \kappa^{2}_{2})^{2}}}\right]
+\label{eq:prop}
+\end{equation}
+%TODO refractive indexes used here are the real part.  I think this should be highlighted and explained.  up to now you have just used the complex form of the refractive indexes.
+
+\section{Ellipsometry}
+\label{sec:Ellip}
+
+Ellipsometry is a spectroscopic technique which is used to analyze materials by the polarization based changes they introduce to light reflected from them.
+
+As shown in section \ref{sec:Fresnel}, the reflection and transmission coefficients for an electric field incident on a material is different, depending on whether the light is s- or p-polarized.
+
+Thus, by comparing the s- and p-polarized light reflected from a material, it is possible to extract information about the material's optical properties.
+
+As a basic example of this, when a dielectric sample, which does not depolarize incident light and does not allow for observable internal reflection, is considered, the complex dielectric constant, $\widetilde{\epsilon}$, and thus the complex refractive index, $\widetilde{n}$, of the material, can be extracted by comparing the s- and p-polarized electric fields reflected from this material \cite{Tompkins-2005}.
+
+\begin{eqnarray}
+\rho &=& \frac{\widetilde{r}_{p} E_{0 p}}{\widetilde{r}_{s} E_{0 s}} = \frac{\widetilde{r}_{p}}{\widetilde{r}_{s}}\label{eq:Rho}\\
+\widetilde{\epsilon} &=& \sin^{2}\theta\left[1 + \left(\frac{1-\rho}{1+\rho}\right)^{2}\tan^{2}\theta\right]\\
+\widetilde{n} &=&  \sqrt{\widetilde{\epsilon}}
+\label{eq:Ellip}
+\end{eqnarray}
+
+In equation \ref{eq:Rho}, it is assumed that $E_{0 p} = E_{0 s} = E_{0}$. By doing so, $E_{0}$ is eliminated from the equation and thus the need to have prior knowledge of the incident electric field is removed.
+Thus, the complex dielectric constant of the sample can be extracted without the need need for a separate measurement to determine the incident electric field, $E_{0}$.
+
+A more in-depth look at our implementation of ellipsometry to extract optical information from measured data can be found in chapter \ref{chp:Analysis}.
+%TODO I think this section needs something about ellipsometry - This iafter all in the title of your thesis and at this point in time there is nothing in your theory chapter about the topic of your thesis.
+%----------------------------------------------------------------------------
+\endinput
