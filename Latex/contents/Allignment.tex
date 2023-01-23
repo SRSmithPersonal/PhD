@@ -1,0 +1,65 @@
+\chapter{Alignment}
+\label{chp:Align}
+
+\section{Rotational mount alignment}
+\label{RotAlign}
+
+The rotational mount, as described in section \ref{sec: rot}, is an integral component of our THz ellipsometry system. This system will house the stage on which our sample and several mirrors will be mounted. It is paramount that this mount is aligned as optimally as possible, as any miss-alignment it incurs will introduce significant errors to measured data.
+
+Several steps were taken to align the rotational mount. A secondary optical route from the femtosecond laser to the receiving antenna was constructed. This allows the system to operate in transmission when needed. %TODO add diagram
+
+When the antennae are removed from their mounts, the femtosecond laser travels from the one mount to the other via the current THz optical path. The femtosecond laser was used to find an optimal placement and height for the antenna mounts, such that the light travels through the center of the mount. The mount was then removed, the antennas inserted and aligned in a transmission configuration.
+
+By using a fast oscillating stage on the path to the transmitting antenna, the pulse can be measured on an oscilloscope and changes made by alterations to the alignment of the mount can be viewed in real time. The stage is then placed back in the THz optical path and manipulated until optimal throughput is achieved.
+
+Once the Rotational mount is placed in the system, the same process is used to find the optimal mounting position for the two Brewster stacks.
+
+\section{Ellipsometric stage and THz antenna alignment}
+\label{chp:EllipsAlign}
+The THz ellipsometric system is sensitive to miss-alignment. An iterative process for aligning the setup was developed. 
+
+A HeNe laser is employed for aligning the lenses, mirrors and sample on the plate mounted on the rotational mount. The use of the HeNe laser requires that the Brewster stacks be removed, as the laser light cannot pass through the silicon.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=2.0]{figs/HeNe2.png}
+	 \caption[Diagram of HeNe alignment laser optical path]{A diagram of the optical path traveled by the HeNe alignment laser.}
+   \label{fig:HeNe}
+\end{center}
+\end{figure}
+
+A flip-down mirror is used to couple the HeNe laser light onto the THz optical path. This eases the change-over between the use of the alignment laser and the THz pulse in the optical path. Several apertures are used to ensure the HeNe laser is coupled straight in and through the rotational mount, as can be seen in figure \ref{fig:HeNe}. The lenses used in our THz system are made from the polymer TPX. This material allows for both visible and THz radiation to pass through it, thus the HeNe laser is used to align these lenses.
+
+A set of measurements, with the rotational mount set to $0^{\circ}$, $90^{\circ}$, $180^{\circ}$ and $270^{\circ}$ respectively, with a silver mirror as the sample is taken via the THz system. These measurements are used to determine whether the THz pulse is traveling straight through the ellipsometric system. If not, the alignment of the antennae must be corrected such that the pulse travels straight through the ellipsometric system. An example of measured results before and after this alignment adjustment can be seen in figure \ref{fig:Align_center}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.4]{figs/Align_poor}&
+                \includegraphics[scale=0.4]{figs/Align_better.png}
+								\end{array}$
+								\end{center}
+	\caption[Example of centering alignment]{(a) is a THz time-domain measurement which is poorly centered. (b) is a repeat of the measurement performed for (a), after the alignment of the photo-conductive antennae was improved regarding radiation going straight through the rotational mount.}
+	\label{fig:Align_center}
+\end{figure}
+
+Next, using a known sample, measurements for p- and s-polarized light reflected from the sample are performed. These measured time-domain electric fields are then compared with electric field produced via simulation, as described in section \ref{chp:Simulation}. This comparison allows for the determination of the angle of incidence, as well as whether the sample has been mounted skew. 
+
+The angle of incidence is determined by comparing the ratio between the first pulse measured for the s- and p- electric fields, with that of the simulated electric fields. This angle of incidence is applied to the simulation and compared to the measured fields. If the sample has been mounted skew, this will be evidenced by poor overlap between simulated and measured arrival times for pulses beyond the initial pulse. In figure \ref{fig:Align_skew} it can be seen how the secondary pulses drift from the expected arrival time when the sample has been inserted skew.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.4]{figs/Align_skew}&
+                \includegraphics[scale=0.4]{figs/Align_straight.png}
+								\end{array}$
+								\end{center}
+	\caption[Example of straightening the sample]{(a) is a THz time-domain measurement taken of silicon with the sample inserted skew and the simulated expected electric fields. (b) is a repeat of the measurement performed for (a), after the sample was straightened and the system was realigned. The expected simulated electric field is also presented.}
+	\label{fig:Align_skew}
+\end{figure}
+
+The sample used to align the setup was high resistivity, undoped single crystal silicon, which has been measured to have a flat real refractive index of $3.4177$ and absorption coefficient of $0.03\,\text{cm}^{-1}$ in the THz region \cite{Li-2008, Jepsen-2007, Grischkowsky1990}.
+
+If the sample mount is skew, or the angle of incidence needs to be altered, said alteration is applied and the process of aligning the ellipsometric stage components must be repeated.
+
+\endinput
