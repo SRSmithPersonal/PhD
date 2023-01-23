@@ -1,0 +1,311 @@
+\chapter{Experimental setup}
+\label{chp:Setup}
+
+Ellipsometry is a powerful spectroscopic technique that is especially useful for optically analyzing thin film samples and optically dense (strongly absorbing) materials \cite{Neshat2013}. Within the THz spectral region this technique will be especially useful for examining biological samples in an aqueous environment, which can not be done easily using THz transmission measurements, due to strong absorption of water in this spectral region \cite{Wu-2018}. No commercial THz ellipsometers exist, thus performing THz ellipsometry measurements necessitates the design, construction and testing of a custom THz ellipsometry setup. This included the design and manufacture of several components, which will be expanded upon in the following sections.
+
+\section{Terahertz generation and detection}
+\label{sec: Tera}
+
+A large portion of black body radiation at room temperature is within the THz region (at $300\,$K, for $0.8\,$THz the black body energy density is $117.7\,\text{W\,m}^{-3}$) \cite{Swinburne-2019}, thus there is a large background within this spectral region. A coherent source is required to allow for measurements in this high background environment.
+Several coherent THz sources, both narrow and broadband, are currently available, such as: non-linear crystals, photo-conductive antennae, quantum cascade lasers, and directly pumped gas lasers \cite{Hubers2008, Siegel2002, Sakai-2005, Xie2006}. There are also several detector options for the THz region. The most common of which are opto-electric crystals, photo-conductive antennae, Schottky diodes and bolometers \cite{Siegel2002, Sakai-2005, Hubers2008}. 
+
+Our setup uses photo-conductive antennae for both detection and generation. Photo-conductive antennae are broadband coherent THz sources, which are also capable of measuring THz electric fields in the time domain \cite{Sakai-2005}. In our setup we use photo-conductive antennae, and will hence expand upon them in the coming subsections.
+
+\subsection{Photo-conductive antennae as THz emitter}
+\label{sub: ant}
+A photo-conductive antenna is a dipole antenna that is printed on a photo-conductive substrate. Photo-conductive substrates are semi-conductor materials, which normally have a very high electrical resistance. When light with a photon energy above the band gap is absorbed by the semiconductor, the resistance decreases by several orders of magnitude, effectively changing the material from an insulator to a conductor \cite{Sakai-2005}.
+
+If the semiconductor material contains many defects, as is the case with low temperature grown gallium arsenide (LT-GaAs), the lifetime of the excited state is extremely short ($<$ps) \cite{Sakai-2005}. 
+If the incident light pulse is a femtosecond laser pulse, the semiconductor switches from an insulator to a conductor and back again in an extremely short ($<$ps)  time \cite{Sakai-2005}.
+
+If the dipole antenna printed on the photo-conductive substrate is supplied with a DC bias voltage, a short current pulse will oscillate in the antenna under femtosecond laser illumination. 
+
+The current in the circuit is dependent on the applied voltage, the excitation lifetime of the generated charge carriers, the momentum relaxation time of the generated charge carriers and the amount of charge carriers generated in the substrate. The single cycle current oscillation produces a single cycle oscillation THz pulse that is emitted from the antenna. This THz pulse is dependent on the oscillating current and the size of the dipole and is described by the following equation \cite{Sakai-2005}:
+
+\begin{eqnarray}
+E(r,t) &=& \frac{l_{e}}{4\pi\epsilon_{0} c^{2} r}\frac{\partial J(t)}{\partial t}\sin{\theta}\label{eq:E0sim}\\
+J(t) &=& \frac{\text{e}\tau_{s}}{m}E_{DC}I_{opt}^{0}\int_{0}^{\infty}e^{-(t-t')^{2}/\tau_{p}^{2}-t'/\tau_{c}}[1-e^{-t'/\tau_{s}}]dt'.
+\label{eq:J0sim}
+\end{eqnarray}
+
+where $J(t)$ is the current in the dipole, $l_{e}$ is the effective length of the dipole, i.e. the length of the laser gap between the two halves of the dipole antenna, $r$ is the distance from the emitter to the point of observation and $\theta$ is the polar observation angle for the emission from the dipole. For the  system we will be focusing on during this dissertation, $\theta$ is taken to be $90^{\circ}$, as the optical path is perpendicular to the emitter. The carrier lifetime of the substrate is represented by $\tau_{c}$, $\tau_{s}$ is the momentum relaxation time of the substrate, $m$ is the effective mass of the charge carriers, e is the charge of an electron and $E_{DC}$ is the applied bias field. A Gaussian pump pulse with a temporal half-width of $2\sqrt{\ln{2}\tau_{p}}$ and peak intensity of $I_{opt}^{0}$ is used \cite{Sakai-2005}. 
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Antenna2}&
+                \includegraphics[scale=1.0]{figs/AntennaPhoto2.png}
+								\end{array}$
+								\end{center}
+	\caption[Photo-conductive antenna diagram and image]{(a) is a diagram of a photo-conductive antenna \cite{Sakai-2005}. (b) is a magnified image of a photo-conductive antenna used in our setup, where the circle indicates the antenna on the image.}
+	\label{fig:PhoAnt}
+\end{figure}
+
+\subsection{Photo-conductive antennae as THz receiver}
+\label{sub: antr}
+A photo-conductive antennae is also used for the detection of THz radiation in our setup. THz detection via a photo-conductive antenna works in a similar fashion to THz emission via a photo-conductive antenna (as discussed in section \ref{sub: ant}) with the difference that the antenna is not biased by a DC voltage. When a femtosecond laser pulse is incident on the dipole, charge carriers in the substrate are excited to the conduction band. A THz electric field incident on the antenna accelerates these generated charge carriers, thus producing a current that can be measured. The induced current is proportional to the incident electric field \cite{Sakai-2005}, as such by measuring the current, the electric field will be determined.
+\paragraph{}
+The induced electric field is represented by the following equation \cite{Sakai-2005}: 
+
+\begin{equation}
+J(t) = \text{e}\mu\int^{\infty}_{-\infty}E(t')N(t'-t)dt'
+\label{eq:DetectCur}
+\end{equation}
+
+where $E(t')$ is the incident THz electric field, $N(t')$ is the number of excited charge carriers in the photo-conductive substrate created by the incident femtosecond laser pulse, e is the elementary electric charge and $\mu$ the electron mobility. 
+
+The generated current only represents a small portion of the incident THz electric field. The generated current is a function of the temporal overlap between the femtosecond laser pulse (fs-pulse) and THz electric field incident on the receiving antenna, as can be seen from equation \ref{eq:DetectCur}. The arrival time of the THz electric field at the receiving antenna can be changed by implementing an optical delay line in the path of the fs-pulse to the transmitting antenna. Altering the arrival time of the THz electric field while keeping the beam path of the fs-pulse to the receiving antenna constant, will cause the temporal overlap of the two pulses to be changed; thus a different temporal slice of the THz electric field will be represented by the generated current. Iterative changes to the optical delay allows for the entire THz electric field to be mapped in time.  
+
+The current induced in the antenna circuit is amplified via frequency based lock-in amplification, which is aided by using the TTL output of the lock-in amplifier for the DC-bias of the the transmitting antenna. This amplified current is measured by use of a DAC.
+
+\section{Brewster stacks}
+\label{sec: Brew}
+Ellipsometric measurements require the electric field incident on the sample to have a pure polarization state, as it allows for the interpretation of polarization dependent changes induced by the sample to the electric field.
+
+The photo-conductive antennae in our setup are structured such that they emit predominantly horizontally polarized light and, similarly, the detector antenna is more sensitive for horizontally polarized light. Hence it would be preferable to work with a pure horizontally polarized electric field.
+
+Two Brewster stacks are implemented in our setup; one before and one after the sample. These polarisers clean up the polarization of the light incident on the sample and reflected from the sample.
+
+Several commercial THz broadband polarisers exist, but these offer non-flat degrees of polarization and/ or transmittance in the spectral range this system will be operating in \cite{TyPol2019}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/BrewsterPho2.png}
+	 \caption[Brewster stack photo]{A photo of a high resistivity silicon based Brewster stack we manufactured for use in our setup.}
+   \label{fig:BrewPho}
+\end{center}
+\end{figure}
+
+As discussed in section \ref{sec:Fresnel}, light incident on a medium at the Brewster angle undergoes reflection based losses to its s-polarized component, but not its p-polarized component. 
+Implementing multiple layers of a substrate at the Brewster angle will hence effectively remove s-polarized light and only leave p-polarized light from an incident source. This type of structure is known as a Brewster stack.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.5]{figs/BrewsterDiag3.png}
+	 \caption[Brewster stack diagram]{A diagram of a high resistivity silicon based Brewster stack we designed for use in our setup. An electric field $E_{0}$ is incident on the Brewster stack, depicted as a black arrow. The red lines represent the s-polarized light reflected at each interface, $r_{s}E_{\text{incident}}$. The blue arrow exiting the system represents the direction of the wave vector of the p-polarised electric field, $E_{p}$, leaving the Brewster stack.}
+   \label{fig:BrewDia}
+\end{center}
+\end{figure}
+
+It should be noted that the Brewster stack, as depicted in figure \ref{fig:BrewDia}, is constructed anti-symmetrically. As light propagates through the medium, it is displaced from its initial path due to the change in propagation direction as described by equation \ref{eq:Snell3}. An anti-symmetric unit of the medium is used for every initial unit to correct this walk-off, hence the electric field exiting the Brewster stack will propagate along the initial path.
+\paragraph{}
+The material implemented in our Brewster stack is high resistivity silicon, due to its high refractive index and low absorption coefficient in the THz region. High resistivity silicon has a refractive index of $3.4177$ and an absorption coefficient of $0.03\,\text{cm}^{-1}$ in the THz region \cite{Li-2008,Jepsen-2007, Grischkowsky1990}. The high refractive index of the material leads to the s-transmission coefficient (equation \ref{eq:FresnelTS}) being relatively low at the Brewster angle ($t_{p_{01}}*t_{p_{10}} = 1.0$ and $t_{s_{01}}*t_{s_{10}} = 0.29$), hence fewer silicon layers are required in order to achieve a highly pure polarization state. In our Brewster stack four layers are used, thereby removing $99.29\%$ of the initial s-polarized electric field. The low absorption coefficient leads to low losses to the pulse as a whole. A photo of a Brewster stack we developed and manufactured can be seen in figure \ref{fig:BrewPho}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/Brewster_stacks_Freq.png}
+	 \caption[Spectrum with and without Brewster stacks]{THz spectral amplitude measured with a silver mirror as the sample with with and without the Brewster stacks present in the setup. These measurements were performed in normal atmospheric conditions, with $51\,\%$ humidity present at $292$K.}
+   \label{fig:BrewSpec}
+\end{center}
+\end{figure}
+
+The photo-conductive antenna used as THz sources in our setup are highly polarized, as can be seen by how little effect the introduction of Brewster stacks have on our measured THz spectral amplitude, as displayed in figure \ref{fig:BrewSpec}.
+
+For the spectral region we will be working in the refractive index of undoped silicon is effectively frequency independent \cite{Li-2008,Jepsen-2007,Grischkowsky1990}, and hence the Brewster angle is also frequency independent, thus making this an ideal polarizing material for our spectral range.
+
+In our system we will use two of these polarisers. To determine the effectiveness of these polarisers, two measurements were performed. One with both polarisers orientated to transmit maximally for the horizontal plane (Co-linear) and one with the first polariser orientated to transmit maximally in the horizontal plane and the second polariser rotated to transmit maximally in the vertical plane (Orthogonal). The Fourier transformed spectra for these two measurements are seen in figure \ref{fig:BrewAmp}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/BrewAmp.png}
+	 \caption[Spectrum of orthogonal and co-linear Brewster stack pairs]{THz spectral amplitude measured with a silver mirror as the sample with the Brewster stacks and a co-linear and orthogonal configuration.}
+   \label{fig:BrewAmp}
+\end{center}
+\end{figure}
+
+By multiplying the THz electric field with its complex conjugate, the intensity of the electric field is calculated, which can be seen in figure \ref{fig:BrewInt}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/BrewInt.png}
+	 \caption[Intensity spectrum of orthogonal and co-linear Brewster stack pairs]{Intensity of THz spectral amplitude measured with a silver mirror as the sample with the Brewster stacks and a co-linear and orthogonal configuration.}
+   \label{fig:BrewInt}
+\end{center}
+\end{figure}
+
+From the intensities in figure \ref{fig:BrewInt}, extinction ratio and degree of polarization can be calculated.
+
+\begin{eqnarray}
+P &=& \frac{I_{1} - I_{2}}{I_{1} + I_{2}} * 100\\
+\rho_{p} &=& \frac{I_{2}}{I_{1}}
+\label{eq:DePol}
+\end{eqnarray}
+
+where $P$ is the degree of polarization, $\rho_{p}$, $I_{1}$ is the co-linear intensity and $I_{2}$ is the orthogonal intensity \cite{Bass2010}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/BrewDeg.png}
+	 \caption[Degree of polarization calculated for the silicon Brewster stacks]{Degree of polarization calculated for the silicon Brewster stacks we manufactured.}
+   \label{fig:BrewDeg}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/BrewExt.png}
+	 \caption[Extinction coefficient calculated for the silicon Brewster stacks]{Extinction coefficient calculated for the silicon Brewster stacks we manufactured.}
+   \label{fig:BrewExt}
+\end{center}
+\end{figure}
+
+From figure \ref{fig:BrewDeg} and figure \ref{fig:BrewExt} it can be seen that these polarisers have phenomenal performance, especially when compared to industry standards \cite{TyPol2019}, as seen in figure \ref{BrewCompo}. 
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/Uspol.png}&
+                \includegraphics[scale=1.26]{figs/ThemPol.png}
+								\end{array}$
+								\end{center}
+	\caption[Degree of polarization comparison]{(a) The degree of polarization calculated for our Brewster stacks. (b) The degree of polarization of a commercial polypropylene wire-grid polariser \cite{TyPol2019}.}
+	\label{BrewCompo}
+\end{figure}
+
+\section{Rotational mount}
+\label{sec: rot}
+
+Ellipsometry requires for both the s- and p-polarized electric fields reflected from a sample to be measured. Commercial THz achromatic half-wave plates, which would normally be used to rotate the polarization of broadband radiation, are currently quite inefficient ($<30\%$ transmission) and are not suitable for our entire spectral range \cite{TyPha2019}. A rotational mount was designed to rotate the sample, which changes the plane of incidence of the sample and hence changes the polarization of the electric field incident on the sample. A CAD drawing of the rotational mount with the optical setup equipped is presented in figure \ref{fig:RotEx}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/RotateEx.png}
+	 \caption[Rotational mount mock-up]{A CAD drawing of a rotational sample mount to allow for s- and p-polarization THz measurements.}
+   \label{fig:RotEx}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/RotateDiag2.png}
+	 \caption[Rotational mount diagram]{A diagram of a THz optical path designed for reflection based measurements. The transfer function for the electric field, $E_{0}$, propagated through the given optical path is represented by $T$. $T$ comprises of the effects of reflecting off the mirrors, propagating through the lenses and interacting with the sample.}
+   \label{fig:RotDiag}
+\end{center}
+\end{figure}
+
+Figure \ref{fig:RotDiag} represents the optical path inside the rotational mount. When the optical path (plane of incidence) is horizontal, the horizontally polarized incident electric field, $E_{0}$, is parallel to the plane of incidence with respect to the sample (p-polarized). Rotating the optical setup by $90^{\circ}$ changes the plane of incidence to the vertical plane, thus, from the frame of reference of the optical path, the electric field is s-polarized. In the frame of reference of the rest of the optical setup, outside of the rotated components, the polarization of the electric field did not change, thus the polarizing components will not need to be adjusted. This is important since rotating the Brewster stacks could easily introduce alignment errors, and the response of the detector can be polarization dependent.
+
+When compared to the approaches of other groups \cite{Xuequan2018, Neshat2012} the use of the rotational mount simplifies data analysis, by effectively eliminating the polarization dependence of the detector. The rotational mount also allows for higher signal to noise ratio, when compared to $45^{\circ}$ rotated antenna \cite{Xuequan2018, Neshat2012}.
+, as the full amplitude of the electric field will be used for both the s- and p-polarized electric field measurements. A potential downside to this design is that during rotation, the system might miss-align, as the bearing could shift along its axis. This design also limits changes to the layout of the terahertz optical path, as a new mounting plate will be needed if the angle of incidence requires noticeable change.
+
+\section{Layout}
+\label{sec: Lay}
+
+THz time-domain ellipsometric measurements require a suitable optical setup for measurements to be performed. This optical setup can be viewed as two distinct components, the optical setup for the THz electric field and the optical setup for the femtosecond laser pulse used to excite the photo-conductive substrate of the antennae. The full layout is depicted in figure \ref{fig:SetDiag}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=1.7]{figs/SetupDiag.png}
+	 \caption[Full optical setup diagram]{A diagram of an optical setup designed for time-domain THz ellipsometry measurements.}
+   \label{fig:SetDiag}
+\end{center}
+\end{figure}
+
+\paragraph{}
+The femtosecond laser path includes a beam-splitter to divide the femtosecond laser pulse onto two paths, one to the emitting antenna and one to the receiving antenna. The path to the emitting antenna includes an optical delay line. This delay line is used to change at which time the THz electric field is generated relative to when the receiving antenna is excited. The temporal overlap between the femtosecond laser pulse and the THz pulse at the receiving antenna is changed to allow for the THz electric field to be measured in time, as discussed in section \ref{sub: antr}.
+\paragraph{}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=1.4]{figs/Setup5THz.png}
+	 \caption[Terahertz optical setup diagram]{A diagram of the THz specific component of the optical setup depicted in figure \ref{fig:SetDiag}.}
+   \label{fig:SetEDiag}
+\end{center}
+\end{figure}
+
+The THz path, as seen in figure \ref{fig:SetEDiag}, is designed for ellipsometry measurements. The closer the angle of incidence is to the Brewster angle of a sample, the smaller the ratio is between the reflection coefficients for p- and s-polarized electric fields (equation \ref{eq:FresnelRS} and \ref{eq:FresnelRP}). The accuracy to which the optical parameters for a given material can be extracted correlates to the magnitude of the ratio between the p- and s- reflections \cite{Neshat2013}, with smaller absolute ratio values expected to yield more accurate results. Our system is designed with an angle of incidence of $60^{\circ}$, since this results in a sufficiently small ratio between $r_{p}$ and $r_{s}$ for a large variety of samples, as can be seen from figures \ref{fig:RefDif} and \ref{fig:RefRat}. For an angle of incidence of $60^{\circ}$ and refractive indexes between $1.2$ and $4.5$, an absolute reflection coefficient ratio ($\frac{r_{p}}{r_{s}}$) $<0.5$ is expected, as can be seen in figure \ref{fig:RefRat}. This range is of interest as it includes semi-conductive substrates (refractive index: $3-4$ \cite{Li-2008}), biological materials (refractive index: $1.5-3.0$ \cite{Charkhesht2018,Novelli2017, Shin2018}), polymers (refractive index: $1.2-1.7$ \cite{Sommer2018, Yamada2016, Cunningham2011}) and water (refractive index: $2.13$ \cite{rii}). Two mirrors, mounted on the rotational mount as discussed in section \ref{sec: rot},  are used to achieve this angle of incidence. Brewster stacks are implemented as both the polarisor and the analyzer. The polarisor is used to select the polarization state for the electric field incident on the sample. A pure polarization state for the THz electric field incident on the receiving antenna is achieved via the analyzer.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/Reflection-Refract.png}
+	 \caption[S- and P-reflection coefficient at $60^{\circ}$ over refractive index]{The real reflection coefficients for s- and p-polarized light reflected at $60^{\circ}$ plotted over refractive index.}
+   \label{fig:RefDif}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/Reflection-Ratio.png}
+	 \caption[Ratio between p- and s-reflection coefficient at $60^{\circ}$ over refractive index]{The ratio between the real reflection coefficients for p- and s-polarized light reflected at $60^{\circ}$ plotted over refractive index.}
+   \label{fig:RefRat}
+\end{center}
+\end{figure}
+
+As indicated on figure \ref{fig:SetEDiag}, the THz optical path contains four lenses. A lens, $F_{1}$, with a focal length of $45\,$mm is used to collimate the radiation from the transmitting antenna. A lens, $F_{2}$, with focal length of $45\,$mm, is used to focus the radiation on the receiving antenna. Two lenses, $F_{3}$ and $F_{4}$, with focal lengths of $200\,$mm, are found on each side of the rotational mount. The lens, $F_{3}$, is used to focus light on the sample and the second, $F_{4}$, is used to collimate the light reflected from the sample before it leaves the rotational mount. Lenses with focal length of $200\,$mm were used so as to not focus strongly on the sample, there by reducing the negative effects that can be introduced by focusing on the sample, such as exacerbating miss-alignments and the effects of the sample not being in the focus of the lenses \cite{Neshat2013}. 
+By lightly focusing on the sample, a smaller beam spot is incident on the sample, thus expanding the options of what samples can be examined by lowering the dimensional restrictions the beam size imposes on the sample. This is especially relevant when windowed cuvettes are used, as it is best to minimize or eliminate radiation reflected from the interface between the window and the surrounding cuvette material.
+%The lenses $F_{3}$ and $F_{4}$ were required to keep the beam from diverging beyond a tolerable size, as the beam path (from $F_{1}$ to $F_{2}$) is $1532\,$mm. 
+
+%A knife edge measurement of the beam was performed to determine the collimated beam size. From this data the $\frac{1}{e^{2}}$ beam waist was extracted by fitting equation \ref{eq:Knife}.
+
+%\begin{equation}
+%I = \frac{K1}{2}\left[1+erf\left(\frac{K2-x}{K3}\right)\right]
+%\label{eq:Knife}
+%\end{equation}
+
+The beam size of our system, for the central frequency, as measured by knife-edge (for more information see Appendix \ref{chp:KE}), is $11.67\,(\pm 0.02)\,$mm ($\frac{1}{e^{2}}$ diameter) after $F_{1}$. The central wavelength of our system is approximately $375\,\mu$m.
+%The Rayleigh length, the distance from the beam waist to the point where the beam radius will have increased by a factor of $\sqrt{2}$, is calculated from the following expression \cite{Paschotta-2019}:
+
+%\begin{equation}
+%Z_{r} = \frac{\pi W^{2}_{0}}{\lambda}
+%\label{eq:Rayleigh}
+%\end{equation}
+
+%where $W_{0}$ is the beam radius at the beam waist and $\lambda$ is the wavelength of the light considered. For our case this equates to a Rayleigh length of $471\,$mm. Hence to prevent high loses in the system and excessive clipping on optical components,  it is required that the beam be re-collimated. The $200\,$mm focal length lenses were chosen for this purpose, as the were optimal for our setup.
+
+The spot size at the focus of the $200\,$mm focal length lenses and the depth of focus, the distance over which the beam is considered to effectively be in focus, can be calculated from the following equations \cite{Newport-2019}:
+
+\begin{eqnarray}
+2*W_{0} &=& \frac{4\,\lambda\,F}{\pi\,D}\\
+DOF &=& \frac{8\,\lambda}{\pi}\left(\frac{F}{D}\right)^{2}
+\label{eq:DOF}
+\end{eqnarray}
+
+where $W_{0}$ is the beam waist at the focus, $F$ is the focal length of the lens, D is the diameter of the beam incident on the lens and DOF is the depth of focus. For a collimated beam with a diameter of $11.67\,(\pm 0.02)\,$mm, it is found that the spot size at the focus is $8.18\,(\pm 0.02)\,$mm and the depth of focus is $280\,(\pm 0.5)\,$mm.
+
+It is important that we have a long depth of focus, as this will allow for internal reflections from samples to be accurately measured. The depth of focus should not be the limiting factor for the thickness of samples we can examine in our system, as $280\,$mm should be far longer than the path length of light traveling through a sample that can be mounted in our system.
+
+\section{Nitrogen ($N_{2}$) Chamber}
+\label{sec: Nitro}
+
+Water vapour has a high abundance in air at ambient conditions. Water vapour has many strong THz resonances, as can be seen in figure \ref{fig:WatRef}. These resonances can hinder the extraction of accurate optical constants from measured data as they can obscure the properties of the material where they are present in the spectrum. These resonances will always be present in ambient conditions. Due to the sensitivity of the system and fluctuations in the amount of water vapour present in the beam path, it is not simple or reliable to remove the water vapour from the data via post processing, thus it is preferable to remove the water vapour from the beam path, which is why it is preferable to perform measurements in a dry environment, as opposed to air. Dry $\text{N}_{2}$ gas is used to achieve this.
+
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=1.5]{figs/Water-n.png}&
+                \includegraphics[scale=1.5]{figs/Water-a.png}
+								\end{array}$
+								\end{center}
+	\caption[THz water vapour real refractive index and absorption spectrum]{The real refractive index and absorption coefficient of water vapour for the THz spectrum, measured at atmospheric pressure and room temperature in our lab.}
+	\label{fig:WatRef}
+\end{figure}
+
+%\begin{figure}[H]
+%\begin{center}
+%	 \includegraphics[scale=1.35]{figs/Water.png}
+%	 \caption[THz water vapour real refractive index and absorption spectrum]{(a) is the real refractive index of water vapour in air at atmospheric pressure and room temperature and (b) is the absorption coefficient of water vapour in air at atmospheric pressure and room temperature as extracted in our lab \cite{Smith2015}.}
+%   \label{fig:WatRef}
+%\end{center}
+%\end{figure}
+
+A chamber was constructed with a parallel gas flow system to effectively create a $\text{N}_{2}$ environment along the THz optical path and purge the system of moisture. A diagrammatic representation of this can be seen in figure \ref{fig:NitDia}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=1.5]{figs/Nitro2.png}
+	 \caption[Nitrogen gas chamber diagram]{A diagram of the THz ellipsometric setup with the nitrogen gas chamber installed.}
+   \label{fig:NitDia}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/WaterVapour.png}
+	 \caption[Measured THz spectrum with and without Nitrogen]{The THz spectrum measured for our system, using a silver mirror and s-polarized light in air and nitrogen.}
+   \label{fig:WatRefspec}
+\end{center}
+\end{figure}
+
+From figure \ref{fig:WatRefspec} it is evident that the implementation of the gas chamber and $\text{N}_{2}$ gas has greatly reduced the prominence of the water vapour spectra in our THz spectrum. The spectrum labeled as 'Air' had a humidity measured to be $\approx\,51\,\%$ and spectrum labeled as 'Nitrogen' was measured to have a humidity of $\leq\,0.1\,\%$. Due to the size of the system, it was found to be difficult to completely remove the water vapour present in the system, but the gas chamber greatly decreased the effect of water vapour on measurements.
+\endinput
