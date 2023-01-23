@@ -1,0 +1,738 @@
+\chapter{Data Analysis}
+\label{chp:Analysis}
+
+Currently there is a distinct lack of data extraction techniques developed for THz time-domain ellipsometry, as many of the traditional methods of ellipsometric data analysis techniques need revision for implementation with this method of ellipsometry \cite{Xuequan2018, Neshat2013, doi:10.1063/1.4940976, Chen2017}. Most of the classical techniques developed for ellipsometry focused on intensity based measurements and tricks for extracting the phase for such measurements \cite{Tompkins-2005}, whereas work in terahertz ellipsometry focuses on bulk isotropic samples and are very sample specific solutions thus far \cite{Xuequan2018, Neshat2013, doi:10.1063/1.4940976, Chen2017}. These techniques do not lend themselves well to isotropic samples which allow for measurable internal reflections, nor do they work when a sample consists of more than one layer. 
+
+We will discuss the data extraction technique applied to bulk isotropic samples. We have developed a technique which extracts the complex refractive index of isotropic samples with measurable internal reflections. A technique for extracting optical data from a two-layer isotropic system is also proposed and discussed. 
+
+\section{Bulk isotropic model}
+\label{sec:BIM}
+Bulk isotropic materials are, in this context, defined as optically isotropic dielectric materials that do not cause depolarization dependent on the crystal orientation and that have a thickness and optical density which do not allow for measurable internal reflections. Accordingly, for this model only first surface reflections need to be considered. A diagram depicting this interaction can be seen in figure \ref{fig:BulkDiag}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=1.5]{figs/BulkDiag2.png}
+	 \caption[Diagram of light-matter interaction with bulk isotropic sample]{Diagram depicting light matter interaction with a bulk isotropic sample. Only surface reflections are measurable, as internal reflections are too weak to be measured.}
+   \label{fig:BulkDiag}
+\end{center}
+\end{figure}
+
+Let us consider the electric field reflected from a bulk isotropic sample. If the s- and p- polarised incident electric fields are the same, i.e. $E_{0 s} =E_{0 p} = E_{0}$, the observed reflected electric field measured in time for the s- and p-polarization can be described as follows
+
+\begin{eqnarray}
+E_{s}(t) &=& \widetilde{r}_{s}(f)E_{0}(t) \label{eq:Es-bulk Time}\\
+E_{p}(t) &=& \widetilde{r}_{p}(f)E_{0}(t) \label{eq:Ep-bulk Time}
+\end{eqnarray}
+
+where $\widetilde{r}_{s}(f)$ and $\widetilde{r}_{p}(f)$ are the frequency dependent s- and p-reflection coefficients (equation \ref{eq:FresnelRP} and \ref{eq:FresnelRS}) and $E_{0}$ is the electric field, incident either with s- or p-polarization. An example of $E_{0}(t)$, $E_{s}(t)$ and $E_{p}$ for a $2\,$mm thick sample, with a frequency independent real refractive index of $2.5$ and a frequency independent absorption coefficient of $120\,\text{cm}^{-1}$, can be seen in figure \ref{fig:BulkTime}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/Bulk_t(n2_5k60d2).png}
+	 \caption[Simulated bulk isotropic example]{Simulated terahertz electric field $E_{0}$ in time, the s-polarised electric field reflected from the sample for $E_{0}$ with a pure s-polarization incident on the sample and the p-polarised electric field reflected from the sample for $E_{0}$ with a pure p-polarization incident on the sample. The sample is bulk isotropic in nature and has a real refractive index of $2.5$ and absorption coefficient of $120\,\mbox{cm}^{-1}$. The extinction coefficient is frequency dependent and calculated by use of equation \ref{eq:abs}.}
+   \label{fig:BulkTime}
+\end{center}
+\end{figure}
+
+Even though the refractive index of our model sample is frequency independent, the reflection coefficients,  $\widetilde{r}_{s}(f)$ and $\widetilde{r}_{p}(f)$, are frequency dependent, and hence it is convenient to  work in the frequency domain. By performing a fast Fourier transform (FFT) on the data it is converted from the time to the frequency domain, hence the electric field components are rewritten as
+
+\begin{eqnarray}
+E_{s}(f) &=& \widetilde{r}_{s}(f)E_{0}(f) \label{eq:Es-bulk Frequency}\\
+E_{p}(f) &=& \widetilde{r}_{p}(f)E_{0}(f) \label{eq:Ep-bulk Frequency}
+\end{eqnarray}
+
+Using standard ellipsometric data analysis, it is possible to extract the complex refractive index from this data \cite{Tompkins-2005}.
+
+\begin{eqnarray}
+P(f) &=& \frac{E_{p}(f)}{E_{s}(f)}\\
+\widetilde{\epsilon}(f) &=& \widetilde{n}_{0}\sin^{2}{\theta}\left[1 + \left(\frac{1-P(f)}{1+P(f)}\right)^{2}\tan^{2}{\theta}\right]
+\label{eq:Ellips}\\
+\widetilde{n}(f) &=& \sqrt{\widetilde{\epsilon}(f)}
+\end{eqnarray}
+
+The angle of incidence is given by $\theta$ in equation \ref{eq:Ellips}, $\widetilde{n}_{0}$ is the complex refractive index of the material surrounding the sample, $P(f)$ is the ratio between the p- and s-polarized electric fields, $\widetilde{\epsilon}(f)$ is the frequency dependent complex dielectric constant of the sample and $\widetilde{n}(f)$ is the frequency dependent complex refractive index of the material.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Bulk_n(n2_5k60d2).png}&
+                \includegraphics[scale=0.5]{figs/Bulk_k(n2_5k60d2).png}
+								\end{array}$
+								\end{center}
+	\caption[Extract complex refractive index of bulk isotropic example]{The complex refractive index extracted from the data presented in figure \ref{fig:BulkTime} via the bulk isotropic data extraction technique. The real part (reflective index) and imaginary part (extinction coefficient) are plotted as function of the THz frequency.}
+	\label{fig:BulkExt}
+\end{figure}
+
+This technique is computationally light, as calculations scale linearly with the size of the transformed data set. As can be seen from figure \ref{fig:BulkExt}, this technique is capable of accurately extracting the complex refractive index for the trivial case of bulk isotropic samples where only first surface reflections need to be considered.
+
+\section{Single layer isotropic model}
+\label{sec:SLM}
+
+Single layer isotropic samples are, in the context of this work, defined as  optically isotropic dielectric materials. These are samples with a thickness and optical density that allow for measurable internal reflections. This model expands on the model in section \ref{sec:BIM} by incorporating these internal reflections.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=2.0]{figs/SingleDiag3.png}
+	 \caption[Diagram of light-matter interaction with single layer isotropic sample]{Diagram depicting light matter interaction with a single layer isotropic sample. Both surface reflections and internal reflections are measurable.}
+   \label{fig:SingleDiag}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/SingleTimeRe.png}
+	 \caption[Simulated single layer isotropic example]{Simulate THz electric field $E_{0}$, simulated s-polarized reflection from a single layer sample when $E_{0}$ is considered purely s-polarized and simulated p-polarized reflection from a single layer sample when $E_{0}$ is considered purely p-polarized. This simulation is in the time domain and the sample in question is a $500\,\mu$m single layer isotropic sample with a frequency independent real refractive index of $3.136$ and a frequency independent absorption coefficient of $10\,\mbox{cm}^{-1}$. The extinction coefficient is frequency dependent and calculated by use of equation \ref{eq:abs}.}
+   \label{fig:SingTime}
+\end{center}
+\end{figure}
+
+\subsection{Transfer Function}
+\label{sub: transp}
+We define the influence of the material on the light pulse as it interacts as a transfer function that can be applied to the light pulse to account for this interaction.
+
+In time-domain data measured for a single layer isotropic system, as depicted in figure \ref{fig:SingTime}, an initial surface reflection followed by a series of pulses as a result of internal reflections is observed. Each of the reflected pulses are separated by fixed temporal spacing, which is only determined by the thickness of the sample, the angle of incidence and the refractive index of the sample.
+
+In this model light reflects off both the back and front face of the sample. The interaction of an electric field, $E_{0}$,  with such a system in the time domain is described by the following function:
+
+\begin{eqnarray}
+E(t) &=& \widetilde{r}_{01}E_{0}(t) + \widetilde{t}_{01}\widetilde{t}_{10}\widetilde{r}_{10}AE_{0}(t) + \widetilde{t}_{01}\widetilde{t}_{10}\widetilde{r}^{3}_{10}A^{2}E_{0}(t)\nonumber\\ 
+& & + \widetilde{t}_{01}\widetilde{t}_{10}\widetilde{r}^{5}_{10}A^{3}E_{0}(t) + ...\nonumber\\
+&=& \widetilde{r}_{01}E_{0}(t) + \widetilde{t}_{01}\widetilde{t}_{10}\widetilde{r}_{10}A\sum_{m=0}(\widetilde{r}_{10}^{2}A)^{m}E_{0}(t)\\
+\mbox{where:}\nonumber\\
+A &=& e^{-i2\pi f \frac{\widetilde{n}d}{c}}\\
+d &=& \frac{2d_{0}}{\cos{\theta_{1 prop}}}\\
+\widetilde{n} &=& n - i\kappa
+\label{eq:Single layer time domain Transport function}
+\end{eqnarray}
+
+and $\widetilde{r}_{01}$ and $\widetilde{t}_{01}$ are the reflection and transmission coefficients for light incident on the system from outside as determined from the Fresnel equations, while $\widetilde{r}_{10}$ and $\widetilde{t}_{10}$ are the reflection and transmission coefficients for light exiting the system. In this equation $d_{0}$ is the sample thickness and $n$ is the real refractive index of the material at a given frequency. The frequency of the electric field is denoted by $f$ and $\kappa$ is the extinction coefficient of the material at the given frequency. The angle of propagation, $\theta_{1 prop}$, is calculated by use of equation \ref{eq:prop}.
+
+Using a Fourier transform, this equation is rewritten in the frequency domain as follows
+
+\begin{equation}
+E(f) = E_{0}(f)(\widetilde{r}_{01} + \widetilde{t}_{01}\widetilde{t}_{10}\widetilde{r}_{10}A(f)\sum_{m=0}(\widetilde{r}_{10}^{2}A(f))^{m})\label{eq:Single layer frequency domain Transport function}
+\end{equation}
+
+\subsection{Complex refractive index extraction}
+\label{sub:compref}
+
+The transfer function described in equation \ref{eq:Single layer frequency domain Transport function} will be used in this subsection to obtain a method to extract the complex refractive index, $\widetilde{n}$, of a sample of interest.
+
+The s- and p-polarized electric fields, $E_{s}(t)$ and $E_{p}(t)$, reflected from a sample have been measured and transformed via FFT to $E_{s}(f)$ and $E_{p}(f)$. These electric fields can be described by extending equation \ref{eq:Single layer frequency domain Transport function}. For these equations it is assumed that $E_{0 s} = E_{0 p} = E_{0}$.
+
+\begin{eqnarray}
+E_{s}(f) &=& E_{0}(f)(\widetilde{r}_{s01} + \widetilde{t}_{s01}\widetilde{t}_{s10}\widetilde{r}_{s10}A(f)\sum_{m=0}(\widetilde{r}_{s10}^{2}A(f))^{m})\nonumber\\
+&=& E_{0}(f)\left(\widetilde{r}_{s01} + \frac{\widetilde{t}_{s01}\widetilde{t}_{s10}\widetilde{r}_{s10}A(f)}{1 - \widetilde{r}_{s10}^{2}A(f)}\right)\label{eq:Single layer frequency domain Transport function s-polarization}\\
+E_{p}(f) &=& E_{0}(f)(\widetilde{r}_{p01} + \widetilde{t}_{p01}\widetilde{t}_{p10}\widetilde{r}_{p10}A(f)\sum_{m=0}(\widetilde{r}_{p10}^{2}A(f))^{m})\nonumber\\
+&=& E_{0}(f)\left(\widetilde{r}_{p01} + \frac{\widetilde{t}_{p01}\widetilde{t}_{p10}\widetilde{r}_{p10}A(f)}{1 - \widetilde{r}_{p10}^{2}A(f)}\right)\label{eq:Single layer frequency domain Transport function p-polarization}
+\end{eqnarray}
+
+The reflected electric fields are strongly dependent on the incident field. However, the need for the electric field $E_{0}$ to be known is eliminated by taking the ratio between $E_{p}(f)$ and $E_{s}(f)$, thus eliminating the need for a reference measurement. This simplifies routine measurements as any misalignment that might be introduced by replacing a reference sample with the actual sample is eliminated.
+
+\begin{eqnarray}
+H(f) &=&  \frac{\widetilde{r}_{p01} + \frac{\widetilde{t}_{p01}\widetilde{t}_{p10}\widetilde{r}_{p10}A(f)}{1 - \widetilde{r}_{p10}^{2}A(f)}}{\widetilde{r}_{s01} + \frac{\widetilde{t}_{s01}\widetilde{t}_{s10}\widetilde{r}_{s10}A(f)}{1 - \widetilde{r}_{s10}^{2}A(f)}}
+\label{eq:Transfer Ratio}
+\end{eqnarray}
+
+Equation \ref{eq:Transfer Ratio} is fitted to the measured data, using the real and imaginary parts of the complex index of refraction, $\widetilde{n}$, as the fit parameters. The Nelder-Mead algorithm is implemented to perform this fit via error minimization. This minimization algorithm was chosen due to the similarity between our method and a method previously developed by Pupeza \textit{et al} for THz time-domain transmission spectroscopy \cite{Pupeza2007}.
+
+The Nelder-Mead algorithm is a direct search algorithm which is used to minimize real non-linear functions, by using only function values, without any derivative information \cite{Lagarias1998}. The Nelder-Mead algorithm is especially useful for solving optimization problems for which the differential is either unknown or not computable. The Nelder-Mead algorithm is also noted for being robust against signal noise \cite{Hejase2012}.
+
+The Nelder-Mead algorithm forms a geometric object of $N+1$ equidistant function points, which is generally referred to as a simplex \cite{Simp2020}, where $N$ is the number of variables which need to be optimized. In our case, the complex refractive index of each frequency component will be minimized separately, as opposed to minimizing the values for the entire data set at once, as this will help reduce the errors in the minimized data \cite{Hejase2012}. In this case, only two variables (the real and imaginary part of the complex index of refraction) will be considered, thus the simplex will be a triangle. For every vertex which makes up this simplex, a fitness function is calculated. The vertex with the worst fitness function value is updated in accordance to the set of rules, \textit{Order, Reflect, Expand} and \textit{Contract}, which can be found in \cite{Lagarias1998}. The optimization stops once the fitness function or standard deviation of the fitness function at all vertices reaches a threshold set at the beginning of the optimization ($<10^{-8}$). There is also a limit set to the number of iterations the optimization will undergo before it will be terminated ($1000$). More details on the Nelder-Mead optimization method can be found in \cite{Lagarias1998,Hejase2012}.
+
+The Nelder-Mead algorithm minimizes the error between the theoretical transfer function ratio, $H(f)$, and the ratio between the measured electric fields, $\frac{E_{p}(f)}{E_{s}(f)}$, by optimizing the the real refractive index, $n$, and extinction coefficient, $\kappa$. In this way the complex refractive index is extracted from the measured data. In our data extraction software the Nelder-Mead algorithm was implemented via the \textit{minimize} function of the Python library, Scipy, with the method set to \textit{nelder-mead} \cite{Sci2019}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single_n_2_d_No_LULU.png}&
+                \includegraphics[scale=0.5]{figs/Single_k_2_d_No_LULU.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic example]{The complex refractive index extracted from the data presented in figure \ref{fig:SingTime} via the complex refractive index extraction method. The sharp spikes present are numerical artifacts caused by erroneous convergence in the minimization algorithm. The initial values used in the simulation, and thus the expected values are represented by "Input", where as the extracted values are represented by "Ellipsometry".}
+	\label{fig:SingExt_try1}
+\end{figure}
+
+\subsection{Smoothing algorithm: LULU}
+\label{sub: LULU}
+The complex refractive index we extract by means of the method discussed in section \ref{sub:compref} has single data point spikes present, as can be seen in figure \ref{fig:SingExt_try1}. We know that the optical constants simulated are smooth, thus these spikes are erroneous. These spikes are numerical artifacts caused by erroneous convergence during the minimization process. These errors are easy to identify, as they are only a single data point in size each, and not to be confuse with actual phenomena occurring in the data.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/n_spikes.png}&
+                \includegraphics[scale=0.42]{figs/k_spikes.png}
+								\end{array}$
+								\end{center}
+	\caption[Comparison of numerical spikes when sampling shifted]{Complex refractive index extracted from data simulated for a $500\,\mu$m sample with a frequency independent refractive index of $3.136$ and frequency independent absorption coefficient of $10.0\,\text{cm}^{-1}$. The time data was sampled from $-11$ to $154\,$ps (original), $-6$ to $159\,$ps (Shifted 5ps later)} and $-16$ to $149\,$ps (Shifted 5ps earlier) and then the data extraction technique was applied.
+	\label{fig:spikes_shift}
+\end{figure}
+
+If the sampling is slightly changed, some of these spikes will disappear and new spikes will appear, as can be seen in figure \ref{fig:spikes_shift}. This shows that these errors are not a simple constant problem and a broad based approach for filtering them out will be required. We suggest the use of a smoothing algorithm to do this.
+
+A smoothing algorithm known as LULU is implemented to eliminate these erroneous points. LULU is an acronym for lower upper lower upper, which refers to how it operates. LULU is a min-max smoothing algorithm which consists of two operators, $L$ and $U$. LULU smooths data by taking the maximum value amongst local minima for $L$ or by taking the minimum value amongst local maxima for $U$ for each data point in a data set. The number of data points which will be considered to either side of a given data point is known as the order of the LULU algorithm.
+
+ For a sequence $S = \{x_{i}|i\in N\}$ the n'th order operators are defined as \cite{Jankowitz2007}:
+
+\begin{eqnarray}
+L_{n}x_{i} &=& \max\{\min\{x_{i-n},...,x_{i}\},..., \min\{x_{i},...,x_{i+n}\}\}\\
+U_{n}x_{i} &=& \min\{\max\{x_{i-n},...,x_{i}\},..., \max\{x_{i},...,x_{i+n}\}\}
+\label{eq:LU}
+\end{eqnarray}
+
+By combining these operators as either $LU$ or $UL$, very reliable smoothing of data can be achieved \cite{kao.2001.lulu}. A one-dimensional variant of a selection method for selecting between $LU$ and $UL$, as proposed by O. Kao \cite{kao.2001.lulu} is implemented to smooth our extracted complex refractive index:
+
+\begin{enumerate}
+	\item Apply LU and UL on $x_{i}$, resulting in $w_{1}$ and $w_{2}$.
+	\item If $w_{1} = w_{2}$, then $x_{i} = w_{1} = w_{2}$. Proceed to step $4$. 
+	\item Otherwise $w_{1} \neq w_{2}$ and if $|w_{1}-x_{i}<|w_{2}-x_{i}|$, then $x_{i} = w_{1}$.
+	Otherwise $x_{i} = w_{2}$.
+	\item Move to the next data point.
+\end{enumerate}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single_n_2_d_LULU_1.png}&
+                \includegraphics[scale=0.5]{figs/Single_k_2_d_LULU_1.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic example with LULU]{The complex refractive index in figure \ref{fig:SingExt_try1} after LULU of order $1$ is applied to it.}
+	\label{fig:SingExt_LULU}
+\end{figure}
+
+In figure \ref{fig:SingExt_try1} the complex refractive index extracted by the algorithm for a single isotropic layer, as explained in section \ref{sub:compref}, from the data presented in figure \ref{fig:SingTime} can be seen. Very clear numerical artifacts (spikes) are present in this data. A LULU of order $1$ is applied to the data, resulting in the removal of these spikes, while leaving the data intact, as can be seen in figure \ref{fig:SingExt_LULU}.
+
+LULU is applied to all single layer isotropic cases that follow. 
+
+\subsection{Error tolerance}
+\label{sub:Error}
+
+If errors are present in the thickness of the sample or the angle of incidence used as input in the data extraction method, this can have a detrimental effect on the extracted results. It is important to understand to what extent these errors can be tolerated.
+
+Several sets of simulated data were produced to test the effect of the accuracy of the determined sample thickness on the extracted result. In the one set the real refractive index was varied, while the absorption coefficient was kept constant and several different sized errors were introduced to the sample thickness used during data extraction. In the other set the absorption coefficient was varied, while the real refractive index was kept constant and several different sized errors were introduced to the sample thickness used during data extraction. The error in the extracted complex refractive index was calculated for each of these data sets (figures \ref{fig:ErND} and \ref{fig:ErKD}).
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/n_err_d_shift_n_change.png}&
+                \includegraphics[scale=0.5]{figs/k_err_d_shift_n_change.png}
+								\end{array}$
+								\end{center}
+	\caption[Error in extracted complex refractive index for constant absorption coefficient, varied real refractive index and multiple thickness errors]{Average error in the real and imaginary parts of the extracted complex refractive index, when a thickness error is introduced ($0\,$-$\,2000\,$nm), if the absorption coefficient is kept constant ($5.0\,\text{cm}^{-1}$) and the real refractive index is varied ($1.4\,$-$\,3.2$). The thickness of the samples is $500\mu$m. The average value was calculated for the frequency domain $0.5-2.0\,$THz.}
+	\label{fig:ErND}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/n_err_d_shift_k_change.png}&
+                \includegraphics[scale=0.5]{figs/k_err_d_shift_k_change.png}
+								\end{array}$
+								\end{center}
+	\caption[Error in extracted complex refractive index for constant real refractive index, varied absorption coefficient and multiple thickness errors]{Average error in extracted complex refractive index, when a thickness error is introduced ($0\,$-$\,2000\,$nm), if the real refractive index is kept constant ($3.2$) and the absorption coefficient is varied ($0.3\,$-$\,30.0\,\text{cm}^{-1}$). The thickness of the samples is $500\mu$m. The average value was calculated for the frequency domain $0.5-2.0\,$THz.}
+	\label{fig:ErKD}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/n_error(32003)-2.png}&
+                \includegraphics[scale=0.5]{figs/k_error(32003)-2.png}
+								\end{array}$
+								\end{center}
+	\caption[Error in extracted complex refractive index for transparent sample and multiple thickness errors]{Error in extracted complex refractive index, when a thickness error is introduced ($0\,$-$\,500\,$nm), for a highly transparent sample. The thickness of the samples is $500\mu$m, the real refractive index is $3.2$ and the absorption coefficient is $\,0.03\,\text{cm}^{-1}$.}
+	\label{fig:ErTD}
+\end{figure}
+
+We find that the extraction of the real refractive index is quite robust with regard to the accuracy in determining the sample thickness, exhibiting average errors lower than $2.5\,\%$ for all cases, as evidenced in figures \ref{fig:ErND} and \ref{fig:ErKD}. The error in the extracted extinction coefficient is a stronger limiting factor, as can be seen in figures \ref{fig:ErND} and \ref{fig:ErKD}. An accuracy greater than $99.96\%$ is required for the thickness of absorbing (absorption coefficient $>1.0\,\text{cm}^{-1}$) materials to maintain an error average below $10\,\%$ in the extracted extinction coefficient. 
+
+For transparent materials the thickness accuracy becomes more strenuous, e.g. for a material with an absorption coefficient of $0.03\,\text{cm}^{-1}$ it was found that a thickness accuracy of $99.996\%$ was required to avoid the average error in the extracted extinction coefficient exceeding $10\%$. This value is obtained by taking the average of each graph in figure \ref{fig:ErTD}.
+\paragraph{}
+The accuracy with which the incident angle is known and its effect on the extracted complex refractive index was also tested. The same data sets used to test the thickness error tolerance were used to test the the incident angle error. Several different errors were introduced in the angle of incidence. The error in the extracted complex refractive index was calculated for each of these data sets (figures \ref{fig:ErNA} and \ref{fig:ErKA}).
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/n_err_a_shift_n_change.png}&
+                \includegraphics[scale=0.5]{figs/k_err_a_shift_n_change.png}
+								\end{array}$
+								\end{center}
+	\caption[Error in extracted complex refractive index for constant absorption coefficient, varied real refractive index and multiple incident angle errors]{Average error in extracted complex refractive index, when an angle of incidence error is introduced ($0^{\circ}\,$-$\,0.05^{\circ}$), if the absorption coefficient is kept constant ($5.0\,\text{cm}^{-1}$) and the real refractive index is varied ($1.4\,$-$\,3.2$). The thickness of the samples is $500\mu$m. The average value was calculated for the frequency domain $0.5-2.0\,$THz.}
+	\label{fig:ErNA}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/n_err_a_shift_k_change.png}&
+                \includegraphics[scale=0.5]{figs/k_err_a_shift_k_change.png}
+								\end{array}$
+								\end{center}
+	\caption[Error in extracted complex refractive index for constant real refractive index, varied absorption coefficient and multiple incident angle errors]{Average error in extracted complex refractive index, when an angle of incidence error is introduced ($0^{\circ}\,$-$\,0.05^{\circ}$), if the real refractive index is kept constant ($3.2$) and the absorption coefficient is varied ($0.3\,$-$\,30.0\,\text{cm}^{-1}$). The thickness of the samples is $500\mu$m. The average value was calculated for the frequency domain $0.5-2.0\,$THz.}
+	\label{fig:ErKA}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/n_error(32003)Ang-2.png}&
+                \includegraphics[scale=0.5]{figs/k_error(32003)Ang-2.png}
+								\end{array}$
+								\end{center}
+	\caption[Error in extracted complex refractive index for transparent sample and multiple incident angle errors]{Error in extracted complex refractive index, when an angle of incidence error is introduced ($0^{\circ}\,$-$\,0.005^{\circ}$), for a highly transparent sample. The thickness of the samples is $500\mu$m, the real refractive index is $3.2$ and the absorption coefficient is $\,0.03\,\text{cm}^{-1}$.}
+	\label{fig:ErTA}
+\end{figure}
+
+We find that the extracted real refractive index is resilient to errors in the angle of incidence. For an error of up to $0.05^{\circ}$ in the angle of incidence the average error in the extracted real refractive remains below $0.5\,\%$. For the extinction coefficient extracted from absorbing (absorption coefficient $>1.0\,\text{cm}^{-1}$) materials to have an accuracy greater than $90\,\%$, the error in the incident angle needs to be smaller than $0.02^{\circ}$, as can be seen from figures \ref{fig:ErNA} and \ref{fig:ErKA}. 
+When considering more transparent samples, this limitation becomes more strenuous, as can be seen in figure \ref{fig:ErTA}. As an example, consider a $500\,\mu$m sample with a real refractive index of $3.2$ and absorption coefficient of $\,0.03\,\text{cm}^{-1}$. For this sample, the angle of incidence needs to be accurate to $0.002^{\circ}$ for the extracted extinction coefficient to have an accuracy greater than $90\,\%$.
+
+\subsection{Thickness extraction}
+\label{sub: thick}
+It was assumed that the thickness of the sample was perfectly known when extracting the complex refractive index presented in figure \ref{fig:SingExt_LULU}. However, for real world samples this thickness can only be measured up to a certain experimental degree of accuracy (the accuracy of a screw micrometer for instance). 
+From simulations, discussed in section \ref{sub:Error}, we found that an accuracy greater than $99.96\%$ is required for the thickness of absorbing (absorption coefficient $>1.0\,\text{cm}^{-1}$) materials, otherwise errors are present in the data. For transparent materials the thickness accuracy becomes more strenuous, e.g. for a material with an absorption coefficient of $0.03\,\text{cm}^{-1}$ it was found that a thickness accuracy of $99.996\%$ was required to avoid the average error in the data exceeding $10\%$.
+ 
+If the thickness of the sample is not correct, this does not only result in erroneous values being extracted by the algorithm in section \ref{sub:compref}, but also results in oscillations being present on the extracted values, as can be seen in figure \ref{fig:SingExt_thErr}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single10umError_n.png}&
+                \includegraphics[scale=0.5]{figs/Single10umError_k.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic with $10\,\mu$m error]{The complex refractive index extracted from the data presented in figure \ref{fig:SingTime} via the complex refractive index extraction method presented in section \ref{sub:compref} if the thickness was over estimated by $10\,\mu$m.}
+	\label{fig:SingExt_thErr}
+\end{figure}
+
+These oscillations are used as an error value and a minimization algorithm is applied to calculate the correct thickness of the sample. The process works as follows for a set of $z$ data points:
+
+\begin{enumerate}
+	\item Start with initial thickness guess.
+	\item Calculate the complex refractive index.
+	\item Calculate the error:
+	\begin{equation}
+	error = \sum_{m=1}^{m<z}(|n_{m}-n_{m-1}| + |\kappa_{m}-\kappa_{m-1}|)
+	\label{eq:ThickFit}
+	\end{equation}
+	where $n_{m}$ and $\kappa_{m}$ are the real refractive index and extinction coefficient extracted for data point $m$.
+	\item Minimize $error$ by altering the thickness used to calculate the complex refractive index.
+\end{enumerate}
+
+The \textit{minimize scalar} function of the Python library, Scipy, was used, with the method set to \textit{bounded}, to minimize $error$. It uses the Brent algorithm to find a local minimum within a given bounded region. Brent's algorithm is a root-finding algorithm which combines the bisection method and secant method with quadratic interpolation, which makes it a robust and highly efficient method \cite{Zhang2011}.
+The bounds of the minimization algorithm were set to $\pm\,10\,\mu$m from the initial guess, as this is the expected limit to which we can measure the thickness of physical samples in our lab.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single1_1umErrorPass1_n.png}&
+                \includegraphics[scale=0.5]{figs/Single1_1umErrorPass1_k.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic with $10\,\mu$m error after one pass of thickness correction]{The complex refractive index extracted from the data presented in figure \ref{fig:SingTime} via the complex refractive index extraction method presented in section \ref{sub:compref} with an $10\,\mu$m error in the initial thickness guess, after applying the corrected thickness calculated via minimization of equation \ref{eq:ThickFit}. The error still present in the thickness is $1.1\,\mu$m.}
+	\label{fig:SingExt_thErr_fix1}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single0umErrorPass2_n.png}&
+                \includegraphics[scale=0.5]{figs/Single0umErrorPass2_k.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic with $10\,\mu$m error after second pass of thickness correction]{The complex refractive index extracted from the data presented in figure \ref{fig:SingTime} via the complex refractive index extraction method presented in section \ref{sub:compref} with an $1.1\,\mu$m error in the initial thickness guess, after applying the corrected thickness calculated via minimization of equation \ref{eq:ThickFit}. No error remains in the thickness applied.}
+	\label{fig:SingExt_thErr_fix2}
+\end{figure}
+
+This process can be computationally strenuous and might require more than one pass, as can be seen from figure \ref{fig:SingExt_thErr_fix1} and figure \ref{fig:SingExt_thErr_fix2}, but does yield the desired results, as evidenced by figure \ref{fig:SingExt_thErr_fix2}. We started with a $10\mu$m ($2\%$) error in sample thickness. The first application of the thickness extraction method produced thickness value with an error of $1.1\mu$m ($0.22\%$). When the thickness value produced by the first application of the thickness extraction method was used as the initial guess for the thickness extraction and the technique was reapplied to the data, the original thickness of the material was recovered ($0\%$ error).
+
+\subsection{Complete data extraction method}
+\label{sub:datex}
+Combining the procedures from \ref{sub: thick} and \ref{sub:compref} it is possible to create a data extraction method that extracts both the complex refractive index and sample thickness, and accordingly does not require perfect knowledge of either.
+
+However, having a good estimate of both the thickness and the complex refractive index simplifies and speeds up the data extraction.
+
+The thickness of most samples can be measured with sufficient accuracy using a vernier caliper. For the complex refractive index it is more complicated, since if an unknown sample or a mixture of samples is investigated, this can not be estimated. A good initial guess can be obtained by only considering the surface reflection. This can be done by applying a  windowing function to the measured data to truncate the data to the surface reflection. For the data produced by our system, the Hann window delivers favorable results \cite{ni2019}. The Hann window is described by the following function \cite{Stearns2005}:
+
+\begin{equation*}
+G(x) = \begin{cases}
+\frac{1}{2}\left(1+\cos\left(\frac{2\pi x}{L}\right)\right) &\text{if $|x|\,\leq\,\frac{L}{2}$}\\
+0 &\text{if $|x|\,>\,\frac{L}{2}$}
+\end{cases}
+\label{eq:Hann}
+\end{equation*}
+
+where $L$ is the desired duration of the window.
+
+If a block window is used, as opposed to a smooth windowing function, this can introduce artificial discontinuities into the sampled data. When a FFT is performed on this truncated data, these discontinuities can lead to oscillations which will obscure the data. These oscillations are caused by the Gibbs phenomenon \cite{ZillAndCullen-2009}.
+These discontinuities can also lead to an error known as spectral leakage, where it appears as if energy at one frequency leaks into other frequencies \cite{ni2019}. 
+
+The Hann window is an especially useful window when working with FFTs, as it is smooth and its amplitude makes contact with $0$ at its edges \cite{ni2019}. By applying a smooth window, such as the Hann window, spectral leakage caused by the windowing of the data is minimized \cite{ni2019} and the Gibbs phenomenon should not effect the data \cite{Stearns2005}.
+
+As an example to showcase the windowing of the electric field and its implementation as an initial guess, let us consider a $500\,\mu$m sample with a frequency independent refractive index of 3.2 and a absorption coefficient of $30\,\text{cm}^{-1}$. Three resonances are introduced to this data; one at $0.6\,$THz, one at $1.3\,$THz and the last at $1.65\,$THz. The resultant electric field can be seen in figure \ref{fig:SingTimeRes}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/Time_window_1.png}
+	 \caption[Simulated single layer isotropic example with strong resonances]{
+Simulated s-polarized reflection from a single layer sample when $E_{0}$ is considered purely s-polarized and simulated p-polarized reflection from a single layer sample when $E_{0}$ is considered purely p-polarized. This simulation is in the time domain and the sample in question is a $500\,\mu$m single layer isotropic sample with a real refractive index of $3.2$ and absorption coefficient of $30\,\mbox{cm}^{-1}$, with three resonances introduced to the data.}
+   \label{fig:SingTimeRes}
+\end{center}
+\end{figure}
+
+When a window is applied to the data in figure \ref{fig:SingTimeRes}, the surface reflection is isolated. This process is shown in figure \ref{fig:SingTimeResWin}. 
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Hann_1(a).png}&
+                \includegraphics[scale=0.5]{figs/Time_window_1_app(b).png}
+								\end{array}$
+								\end{center}
+	\caption[Simulated single layer isotropic example with strong resonances with Hann window]{(a) The electric fields displayed in figure \ref{fig:SingTimeRes} and the Hann window which will be applied to it. (b) the electric fields produced by multiplying the window function shown in (a) with the electric fields in figure \ref{fig:SingTimeRes}.}
+	\label{fig:SingTimeResWin}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single/n_window.png}&
+                \includegraphics[scale=0.5]{figs/Single/k_window.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic sample with Hann window and bulk isotropic model]{The complex refractive index extracted from the data in figure \ref{fig:SingTimeResWin}(b) by applying the bulk isotropic model. The black curve represents the values used in the simulation as input and the red curve represents the extracted values.}
+	\label{fig:SingExt_HannBulk}
+\end{figure}
+
+From figure \ref{fig:SingExt_HannBulk}, it can be seen that the data extracted by the bulk isotropic model from the data in figure \ref{fig:SingTimeResWin} has been heavily smoothed. This result is very rudimentary and contains almost non of the finer details of the optical properties of the sample, thus it can be seen that this is not an ideal solution to extracting data from single layer samples, but this is however a strong initial guess for the single layer extraction method. This extracted complex refractive is used as the initial guess, with each data point representing an initial guess for the frequency component it represents.
+
+This complex refractive index is used as an initial guess in the single layer extraction method, and the resultant extracted complex refractive index is displayed in figure \ref{fig:SingExt_HannBulk}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single/n_window_single2.png}&
+                \includegraphics[scale=0.5]{figs/Single/k_window_single2.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic sample with Hann window as initial guess]{The complex refractive index extracted from the data in figure \ref{fig:SingTimeRes} by applying the single layer extraction method
+	and utilizing the data in figure \ref{fig:SingExt_HannBulk} as the initial guess.}
+	\label{fig:SingExt_HannSingle}
+\end{figure}
+
+The complex refractive index produced by applying the bulk isotropic model to the truncated data is a very good initial guess for the single layer extraction method and, for simulated data, has shown its ability to help the data extraction technique converge nearly perfectly to the expected values, as can be seen in figure \ref{fig:SingExt_HannSingle}.
+
+This algorithm was applied to a myriad of simulated single layer samples with frequency independent real refractive indexes and absorption coefficients and gave near perfect results in all cases, as can be seen in the example extracted data in figure \ref{fig:SingExt_CompFlat}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/Single/MultSingleN.png}&
+                \includegraphics[scale=0.42]{figs/Single/MultSingleK.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic samples with uniform properties]{The complex refractive indexes extracted from four samples with different frequency independent real refractive indexes and absorption coefficients.}
+	\label{fig:SingExt_CompFlat}
+\end{figure}
+
+The introduction of resonances into the data can however negatively impact the ability of the algorithm to converge to the correct values, as can be seen in figure \ref{fig:SingExt_CompRes}. This is in part due to the resonances being heavily smoothed and spread to surrounding frequencies in the windowed initial guess.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/Single/MultSingleNRes.png}&
+                \includegraphics[scale=0.42]{figs/Single/MultSingleKRes.png}
+								\end{array}$
+								\end{center}
+	\caption[Extracted complex refractive index for single layer isotropic samples with resonances present]{The complex refractive indexes extracted from three samples with different real refractive indexes and absorption coefficients and resonances present in their spectra.}
+	\label{fig:SingExt_CompRes}
+\end{figure}
+
+During these tests, LULU of order $1$ was applied to the data to remove the numerical errors resulting from convergence errors and the thickness extraction technique was applied, but no error was added to the initial guess of the thickness.
+
+\section{Single layer isotropic medium followed by bulk isotropic sample model}
+\label{sec:DLM}
+
+Our initial goal is to develop a system for analyzing samples in aqueous solution. A cuvette is required to mount these samples in the setup. The cuvette and aqueous sample form a two-layer sample, where the first layer, the cuvette, is a single layer isotropic medium and the second layer, the aqueous sample, is a bulk isotropic sample.
+
+\subsection{Two layer ellipsometric method}
+\label{sub:DLM}
+
+A simple approach to a two layer system consisting of a single layer isotropic sample and a bulk isotropic sample is to isolate the first and second pulse in the series of reflections from the sample and then solve them separately using the bulk isotropic method.
+
+Consider an aqueous solution inside a silicon cuvette.  This can be treated as a combination of the bulk isotropic model and the single layer isotropic model.  The Si wall is a thin transparent layer on top of a optically dens bulk sample. The Silicon layer can be described by the model in section \ref{sec:SLM} and the water solution as the model in section \ref{sec:BIM}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=2.0]{figs/TwoDiag3.png}
+	 \caption[Diagram of light-matter interaction with single layer isotropic medium deposited on bulk isotropic sample]{Diagram depicting light matter interaction with a single layer isotropic medium layered on top of a bulk isotropic sample. Both surface reflections and internal reflections are measurable for the single layer medium, but only surface reflections are measurable for the bulk isotropic sample.}
+   \label{fig:TwoDiag}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/TwoLayerWaterTime.png}
+	 \caption[Simulated example of a single layer isotropic medium deposited on a bulk isotropic sample]{Simulated electric field $E_{0}$, simulated s-polarized reflection of incident s-polarized electric field $E_{0s}$ and p-polarized reflection of incident p-polarized electric field $E_{0p}$, where $E_{0s} = E_{0p} = E_{0}$. The simulated sample is a $500\,\mu $m single layer isotropic medium with a real refractive index of $3.4177$ and absorption coefficient of $0.03\,\mbox{cm}^{-1}$ deposited on a $2\,\mbox{mm}$ bulk isotropic sample with a real refractive index of $2$ and absorption coefficient of $200\,\mbox{cm}^{-1}$.}
+   \label{fig:DoubleTime}
+\end{center}
+\end{figure}
+
+The measured time-domain data for a single layer medium deposited on a bulk isotropic sample, as depicted in figure \ref{fig:DoubleTime}, contains a pulse reflected from the surface of the single layer isotropic medium, followed by a series of internal reflections that occur inside the single layer medium.
+\paragraph{}
+Assuming nothing is known about either layer, one of the simplest solutions is to implement truncation. Due to the use of FFT functions in the data analysis process, it is preferable to use a smooth windowing function to truncate the data, as opposed to a block function. For our purposes, the Hann window is ideal \cite{ni2019}.
+
+A Hann window is applied to the data to select out the first pulse in the pulse train. This process can be seen in figure \ref{fig:DoubleGauss1}. This first pulse is the reflection from the surface of the single layer isotropic medium, and only contains information about this layer. The complex refractive index of this layer is extracted from this truncated data via the bulk isotropic model, as described in section \ref{sec:BIM}.
+
+\begin{equation}
+E(t)G_{1}(t) = \widetilde{r}_{01}G_{1}(t)E_{0}(t)
+\label{eq:Gaussian1}
+\end{equation}
+
+The window function, $G_{1}(t)$, is multiplied on a point-by-point bases with the measured electric field, $E(t)$, in the time domain. This results in only the initial reflection remaining in the data, as seen in figure \ref{fig:DoubleGauss1}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow125.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow1app25.png}
+								\end{array}$
+								\end{center}
+	\caption[Application of Hann window to truncate to first pulse]{A Hann window is applied to the data represented in figure \ref{fig:DoubleTime}. This truncates the data to the first pulse, which represents the pulse reflected from the surface of the single layered isotropic medium.}
+	\label{fig:DoubleGauss1}
+\end{figure}
+
+Next, a Hann window is applied to the data, which isolates the second pulse in the pulse train. An illustration of this process can be seen in figure \ref{fig:DoubleGauss2}. This pulse represents the initial electric field transmitted into the single layered isotropic medium, propagated through the medium, reflected off the interface between the single layered isotropic medium and the bulk isotropic sample, propagated through the medium again and transmitted out of the sample.
+
+\begin{equation}
+E(t)G_{2}(t) = \widetilde{t}_{01}A\widetilde{r}_{12}\widetilde{t}_{10}G_{2}(t)E_{0}(t)
+\label{eq:Gaussian2}
+\end{equation}
+
+Similar to the window applied to truncate the data to the first reflection, the second window, $G_{2}(t)$, is multiplied with the measured electric field, $E(t)$, truncating the data to only represent the electric field reflected from the interface between the single layer medium and the bulk isotropic sample, as shown in figure \ref{fig:DoubleGauss2}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow225.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow2app25.png}
+								\end{array}$
+								\end{center}
+	\caption[Application of Hann window to truncate to second pulse]{A second Hann window is applied to the data represented in figure \ref{fig:DoubleTime}. This truncates the data to the second pulse, which represents the pulse reflected from the interface between the single isotropic medium and the bulk isotropic sample.}
+	\label{fig:DoubleGauss2}
+\end{figure}
+
+With the optical constants of the first layer known, the transmission coefficient and attenuation coefficients can be removed from the data. This leaves the reflection coefficient for the interface between the single layered isotropic medium and bulk isotropic sample. The bulk isotropic model is applied to extract the complex refractive index of the bulk isotropic sample as illustrated in figure \ref{fig:DoubleExt}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterRefractiveIndex25.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterExtinction25.png}
+								\end{array}$
+								\end{center}
+	\caption[Complex refractive index extracted from example of a single layer isotropic medium deposited on a bulk isotropic sample]{The complex refractive index extracted of the bulk sample ($n_{2}$ and its corresponding extinction coefficient) from the data presented in figure \ref{fig:DoubleTime} via the two layer ellipsometric method.}
+	\label{fig:DoubleExt}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/TwoLayerWaterError25.png}
+	 \caption[Two layer ellipsometry error]{The error calculated for the extracted real refractive index and extinction coefficient data shown in figure \ref{fig:DoubleExt}.}
+   \label{fig:DoubleExtEr}
+\end{center}
+\end{figure}
+
+From figure \ref{fig:DoubleExtEr} it can be seen that a windowing error is present in the extracted complex refractive index, but the extracted values are still fairly accurate. There is a comparatively large error in the real refractive index at lower frequencies, which rapidly falls as the frequency increases. This is a byproduct of the windowing function. Increasing the size of the window lowers this error, but as the size of the window is increased, this will also increase the effects of noise and other signals present on the data, which becomes relevant when considering experimentally measured data.
+
+%\begin{figure}[H]
+%                \begin{center}$
+%								\begin{array}{cc}
+%                \includegraphics[scale=0.5]{figs/Block_double_n.png}&
+%                \includegraphics[scale=0.5]{figs/Hann_double_n.png}
+%								\end{array}$
+%								\end{center}
+%	\caption[Extracted real refractive index for two-layer sample comparing block window with Hann window]{The real refractive index extracted from simulated data by applying (a) a block window and (b) a Hann window and applying the two layer extraction method.}
+%	\label{fig:Window_Comp_double}
+%\end{figure}
+
+%If a block window were used, instead of a smooth window, it can introduce artificial discontinuities, which can lead to the occurrence of the Gibbs phenomena when a FFT is applied to the data. %TODO ref
+%This results in oscillations on the produced data, as seen in figure \ref{fig:Window_Comp_double}.
+
+%\begin{figure}[H]
+%                \begin{center}$
+%								\begin{array}{cc}
+%                \includegraphics[scale=0.5]{figs/TwoLayer_n_together.png}&
+%                \includegraphics[scale=0.5]{figs/TwoLayer_k_together.png}
+%								\end{array}$
+%								\end{center}
+%	\caption[Extracted complex refractive indexes of a set of two-layer samples]{The complex refractive indexes extracted from a set of two layer samples.}
+%	\label{fig:TwoLayerMultSim}
+%\end{figure}
+
+%The heavy use of windowing in this method does result in a large amount of smoothing and does introduce some errors in in the resultant data. This technique does however lend itself well to tracking bulk changes in the complex refractive index of the materiel and can even be used to track peak shifts when changes of this nature occur in a sample, as seen in figure \ref{fig:TwoLayerMultSim}.
+
+This algorithm is independent of the sample thickness and LULU is not applied to the data.
+
+\subsection{Self-reference method}
+\label{sub:Self}
+
+Another method for extracting data for a two layer system such as the one discussed in this section was proposed by Jepsen \textit{et al} \cite{Jepsen-2007}.
+This method employs reflection spectroscopy, as opposed to ellipsometry. It is preferable to work with a system with a pure s- or p-polarization, as this greatly simplifies the mathematics used to extract optical parameters from measured data.  
+
+In reflection spectroscopy, to extract information from measured data, a reference measurement is required so that the electric field incident on the sample can be removed from the calculations. Switching between a reference sample and a sample of interest can introduce miss-alignments in the system, which can introduce errors to the extracted information.
+
+The reference sample used in the Self-reference case is the same as the sample which will be investigated, except the second layer is nitrogen, as opposed to a liquid sample of interest. 
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=2.0]{figs/SelfRef2.png}
+	 \caption[Diagram of light-matter interaction with empty reference cuvette]{Diagram depicting light matter interaction with a single layer isotropic medium. This measurement will act as the reference measurement.}
+   \label{fig:SelfRef}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=2.0]{figs/SelfSam2.png}
+	 \caption[Diagram of light-matter interaction with filled cuvette]{Diagram depicting light matter interaction with a single layer isotropic medium layered on top of a bulk isotropic sample.}
+   \label{fig:SelSam}
+\end{center}
+\end{figure}
+
+The first layer is used as a localized reference, to correct for any phase error introduced by changing between the sample and the reference. This first layer is considered to not change between measurements, thus any changes observed for this layer between changing samples can be used to calculate corrections for the entire measurement.
+ This method employs truncation to isolate the first and second reflections for both the sample and reference. For a pure p-polarized system, it can be shown that \cite{Jepsen-2007}:
+
+\begin{eqnarray}
+\widetilde{r}_{12}(f) &=& \frac{\widetilde{r}_{10}(f)C_{2}(f)}{C_{1}(f)}\label{eq:SelfR}\\
+C_{1}(f) &=& \frac{E_{air}(f)}{E_{ref\,1}(f)}\\
+C_{2}(f) &=& \frac{E_{sample(f)}}{E_{ref\,2(f)}}
+\label{eq:Self}
+\end{eqnarray}
+
+where $\widetilde{r}_{12}(f)$ is the reflection between the first and second layer of the sample, $E_{ref\,1}(f)$ and $E_{air}(f)$ are the FFTs of the truncated first and second reflections from the reference sample, as shown in figure \ref{fig:SelfRef}, and $E_{ref\,2}(f)$ and $E_{sample}(f)$ are the FFTs of truncated first and second reflections from the sample of interest, as shown in figure \ref{fig:SelSam}.
+ %$E_{air}$ and $E_{sample}$ are the truncated second reflections of the reference and sample respectively and $E_{ref\,1}$ and $E_{ref\,2}$ are the truncated first reflections for the reference and sample respectively. 
+The reference material should be well characterized, thus allowing for the calculation of $\widetilde{r}_{10}(f)$, which is the expected reflection coefficient between the reference material and air. The complex refractive index of the unknown sample can then be extracted from $\widetilde{r}_{12}(f)$. For a pure p-polarized system, the following solution was calculated by inverting equation \ref{eq:FresnelRP} to make $\widetilde{n}(f)$ the subject of the equation:
+
+\begin{eqnarray}
+\widetilde{r}_{12}(f) &=& \frac{\widetilde{n}(f)\sqrt{1-\frac{sin^{2}{\theta}}{\widetilde{n}^{2}_{ref}(f)}} - \widetilde{n}_{ref}(f)\sqrt{1-\frac{sin^{2}{\theta}}{\widetilde{n}^{2}(f)}}}{\widetilde{n}(f)\sqrt{1-\frac{sin^{2}{\theta}}{\widetilde{n}^{2}_{ref}(f)}} + \widetilde{n}_{ref}(f)\sqrt{1-\frac{sin^{2}{\theta}}{\widetilde{n}^{2}(f)}}}\\
+0 &=& (\widetilde{r}_{12}(f)-1)^{2}(\widetilde{n}^{2}_{ref}(f)-sin^{2}{\theta})\widetilde{n}^{4}(f)\nonumber\\
+& & -(\widetilde{r}_{12}(f)+1)^{2}\widetilde{n}^{4}_{ref}(f)\widetilde{n}^{2}(f)\nonumber\\
+& & +(\widetilde{r}_{12}(f)+1)^{2}\widetilde{n}^{4}_{ref}(f)sin^{2}{\theta}\\
+%Z_{1} &=& \frac{1}{(1 - \widetilde{r}_{12})\frac{\sqrt{1 - \frac{\sin^{2}{\theta}}{\widetilde{n}_{ref}^{2}}}}{\widetilde{n}_{ref}(1 + \widetilde{r}_{12})}}\\
+Z_{1}(f) &=& (\widetilde{r}_{12}(f)-1)^{2}(\widetilde{n}^{2}_{ref}(f)-sin^{2}{\theta})\\
+Z_{2}(f) &=& (\widetilde{r}_{12}(f)+1)^{2}\widetilde{n}^{4}_{ref}(f)\\
+\widetilde{n}^{2}(f) = \widetilde{\epsilon}(f) &=& \frac{Z_{2}(f) + \sqrt{Z_{2}^{2}(f) - 4Z_{1}(f)Z_{2}(f)\sin^{2}{\theta}}}{2Z_{1}(f)}\\
+n(f) &=& \sqrt{\frac{\text{Re}[\widetilde{\epsilon}(f)] + \sqrt{\text{Re}[\widetilde{\epsilon}(f)]^{2} + \text{Im}[\widetilde{\epsilon}(f)]^{2}}}{2}}\\
+\kappa(f) &=& \frac{-\text{Im}[\widetilde{\epsilon}(f)]}{2n(f)}
+\label{eq:Selfext}
+\end{eqnarray}
+
+The complex refractive index of the sample is represented by $\widetilde{n}(f)$, the complex dielectric constant by $\widetilde{\epsilon}(f)$ and the complex refractive index of the reference material is $\widetilde{n}_{ref}(f)$. The angle of incidence is $\theta$, the real refractive index of the sample is $n (f)$ and the extinction coefficient of the material is $\kappa (f)$. The reflection coefficient for the interface between the sample and reference material, $r_{12}(f)$, is calculated by equation \ref{eq:SelfR}.
+
+As an example, let us consider the sample in figure \ref{fig:DoubleTimeP}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/TwoLayerWaterTimeP.png}
+	 \caption[Simulated example of a single layer isotropic medium deposited on a bulk isotropic sample only p-polarization]{Simulated p-polarized electric field $E_{0p}$,simulated p-polarized reflection of incident p-polarized electric field $E_{0p}$ from cuvette without the sample present and simulated p-polarized reflection of incident p-polarized electric field $E_{0p}$ from cuvette with the sample present. The simulated cuvette is a $500\,\mu $m single layer isotropic medium with a real refractive index of $3.4177$ and absorption coefficient of $0.03\,\mbox{cm}^{-1}$ and the sample is a $2\,\mbox{mm}$ bulk isotropic medium with a real refractive index of $2$ and absorption coefficient of $200\,\mbox{cm}^{-1}$.}
+   \label{fig:DoubleTimeP}
+\end{center}
+\end{figure}
+
+The windowing function we employ is the Hann window and it is used in a similar fashion to the case in section \ref{sub:DLM}, which is shown in figures \ref{fig:DoubleGauss1P} and \ref{fig:DoubleGauss2P}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow125P.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow1app25P.png}
+								\end{array}$
+								\end{center}
+	\caption[Application of Hann window to truncate to first pulse]{A Hann window is applied to the data represented in figure \ref{fig:DoubleTimeP}. This truncates the data to the first pulse, which represents the pulse reflected from the surface of the single layered isotropic medium. This is done for both the reference and the sample.}
+	\label{fig:DoubleGauss1P}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow225P.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterTimeWindow2app25P.png}
+								\end{array}$
+								\end{center}
+	\caption[Application of Hann window to truncate to second pulse]{A second Hann window is applied to the data represented in figure \ref{fig:DoubleTimeP}. This truncates the data to the second pulse, which represents the pulse reflected from the interface between the single isotropic medium and the bulk isotropic sample. This is done for both the reference and the sample.}
+	\label{fig:DoubleGauss2P}
+\end{figure}
+
+The windowed data in figure \ref{fig:DoubleGauss1P}, for the reference, is used as $E_{ref1}$ and the data for the sample is used as $E_{ref2}$.
+The windowed data in figure \ref{fig:DoubleGauss2P}, for the reference, is used as $E_{air}$ and the data for the sample is used as $E_{sample}$.
+The self-reference data extraction method is applied to this data and the complex refractive index is extracted, which can be seen in figure \ref{fig:DoubleExtSelf}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterRefractiveIndexSelf25.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerWaterExtinctionSelf25.png}
+								\end{array}$
+								\end{center}
+	\caption[Complex refractive index extracted from example of a single layer isotropic medium deposited on a bulk isotropic sample, via the self-reference method]{The complex refractive index extracted from the data presented in figure \ref{fig:DoubleTimeP} via the self-reference method.}
+	\label{fig:DoubleExtSelf}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.8]{figs/TwoLayerWaterErrorSelf25.png}
+	 \caption[Two layer self-reference error]{The error calculated for the extracted real refractive index and extinction coefficient data shown in figure \ref{fig:DoubleExtSelf}.}
+   \label{fig:DoubleExtSelfEr}
+\end{center}
+\end{figure}
+
+From figure \ref{fig:DoubleExtSelfEr} it can be seen that a windowing error is present on the extracted complex refractive index, but the extracted values are still fairly accurate. Similar to the two-layer ellipsometric method used in section \ref{sub:DLM}, there is a comparatively large error in the real refractive index at lower frequencies, which rapidly falls as the frequency increases. This is a byproduct of the windowing function. The windowing error is however smaller than the error present in the two-layer ellipsometric method (section \ref{sub:DLM}). This is not surprising, as the method should inherently correct for this error, as it should be similar in both the reference data and the sample data. 
+
+\subsection{Comparison}
+\label{sub:Cmp2}
+
+As a simple comparison between the two layer ellipsometric method, section \ref{sub:DLM}, and the self-reference method, section \ref{sub:Self}, let us consider four different liquid samples. All four samples have a thickness of $2\,$mm and are deposited on a $500\,\mu$m single layer sample with a real refractive index of 3.4177 and absorption coefficient of $0.03\,\text{cm}^{-1}$. Sample one has a refractive index of $2.0$ and absorption coefficient of $80.0\,\text{cm}^{-1}$, sample two has a refractive index of $1.95$ and absorption coefficient of $79.0\,\text{cm}^{-1}$, sample three has a refractive index of $1.9$ and absorption coefficient of $78.0\,\text{cm}^{-1}$ and sample four has a refractive index of $1.8$ and absorption coefficient of $76.0\,\text{cm}^{-1}$. Samples one, two and three each had resonances added at $1.3$ and $1.65\,$THz, while sample four had a resonances added at $1.35$ and $1.7\,$THz. The simulated electric fields can be seen in figure \ref{fig:CompTime}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/ES2CompTime.png}&
+                \includegraphics[scale=0.42]{figs/EP2CompTime.png}
+								\end{array}$
+								\end{center}
+	\caption[Time data for several two layer samples]{Time data produced for several different bulk samples deposited on a single layer isotropic medium.}
+	\label{fig:CompTime}
+\end{figure}
+
+The simulated electric fields shown in figure \ref{fig:CompTime} were used to test both the two layer ellipsometric method and the self-reference method. 
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerEllipsMultiN.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerEllipsMultiK.png}
+								\end{array}$
+								\end{center}
+	\caption[Complex refractive index extracted from example of a single layer isotropic medium deposited on a bulk isotropic sample]{The complex refractive indexes extracted from the data presented in figure \ref{fig:CompTime} via the two layer ellipsometric method.}
+	\label{fig:DoubleExtComp}
+\end{figure}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/TwoLayerSelfMultiN.png}&
+                \includegraphics[scale=0.42]{figs/TwoLayerSelfMultiK.png}
+								\end{array}$
+								\end{center}
+	\caption[Complex refractive index extracted from example of a single layer isotropic medium deposited on a bulk isotropic sample, via the self-reference method]{The complex refractive indexes extracted from the data presented in figure \ref{fig:CompTime} via the self-reference method.}
+	\label{fig:DoubleExtSelfComp}
+\end{figure}
+
+From figures \ref{fig:DoubleExtComp} and \ref{fig:DoubleExtSelfComp} we find that both the two layer ellipsometric method and self-reference method extract similar values for the extinction coefficient with the peak shift being visibly more pronounced in the two layer ellipsometry data, but only to a minor extent. Both methods extracted similar values for the main refractive index and extinction coefficient of each sample and the values of the different samples are clearly distinguishable from each other. The most noteworthy difference between the two sets of extracted complex refractive indexes is the difference in how the resonances effected the extracted refractive index data. In the case of the two layer ellipsometric method, the refractive index is lifted by the resonances, while in the self-reference case the resonances are effectively smoothed away in the refractive index data.
+
+From these results we find that both methods are useful for distinguishing different liquid samples from each other. When considering the data not at the resonances, both methods offer similar results. The ellipsometric method displays the resonances in the complex refractive index more prominently than the self-reference method, but as these resonances are not clearly resolved, this might not always be a favourable result, hence the usefulness of this depends on the application of the data.
+
+The self reference method has the advantage of only needing one set of data per sample, assuming the reference material stays the same between different samples. In the case of the two-layer ellipsometry method two sets of data measured in the s- and p-polarization directions are needed. This in turn has the effect of making the self-reference method more robust with regards to miss-alignment and error in the angle of incidence. The disadvantage of this method when compared to the two layer ellipsometric method is that the reference material needs to be well characterized and that resonances in the extracted complex refractive index will be less pronounced than in the ellipsometric case.
+%----------------------------------------------------------------------------
+\endinput
