@@ -1,0 +1,76 @@
+\chapter{Calculation of the geometric correction}
+\label{chp:Geom}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=2.0]{figs/Diag22.png}
+\end{center}
+\caption[Diagram depicting ray-trace of internal reflection compared to surface reflection]{A ray tracing diagram for calculating the travel time difference between two successive reflections traveling through the setup.}
+\end{figure}
+
+This system can be divided up into two components, a system encompassing $r_{1}$ and $r_{2}$ and a system focusing on $r_{3}$ and $r_{4}$.
+
+$\Delta x_{1}$ is calculated by using Snell's laws.
+
+\begin{eqnarray}
+\theta_{1} &=& \sin^{-1}(\frac{n_{0}\sin(\theta)}{n_{1}})\\
+\Delta x_{1} &=& 2d\tan(\theta_{1})
+\label{eqn:Geo0}
+\end{eqnarray}
+
+Via construction, a set of similar triangles with $r_{1}$ and $r_{2}$ as parallel sides is drawn.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1.2]{figs/Sec1-2.png}
+\end{center}
+\caption[First section of the exiting beam path used to calculate a geometric correction for subsequent beams.]{First part of the construction used to solve the geometric error introduced to subsequent beams.}\label{fig:GeoSec-1}
+\end{figure}
+
+$r_{1}$ and $r_{2}$ can be solved by making use of the construction shown in figure \ref{fig:GeoSec-1}. $\Delta K$ can also be extracted from this sketch. 
+
+\begin{eqnarray}
+\phi &=& 90^{\circ} - \theta\\
+\beta &=& 75^{\circ} + \frac{\phi}{2}\\
+AE &=& x_{1} - \frac{x_{1}\tan(\phi)}{\tan{\beta}}\\
+AC &=& AE - \Delta x_{1}\\
+r_{1} &=& \frac{x_{1}}{\cos(\phi)}\\
+K_{1} &=& \sqrt{r_{1}^{2} + AE^{2} - 2r_{1}\,AE\cos(\phi)}\\
+K_{2} &=& \frac{K_{1}(AC + 1)}{\Delta x_{1}}\\
+r_{2} &=& \sqrt{K_{2}^{2} + AC^{2} - 2K_{2}\,AC\cos{\alpha}}\\
+\Delta K &=& K1 - K2
+\label{eqn:geo1}
+\end{eqnarray}
+
+$r_{3}$ and $r_{4}$, and subsequently $\Delta x_{2}$, can be solved by via a second construction of two similar triangles, with $r_{3}$ and $r_{4}$ as similar sides.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1.2]{figs/Sec2-2.png}
+\end{center}
+\caption[Second section of the exiting beam path used to calculate a geometric correction for subsequent beams.]{Second part of the construction used to solve the geometric error introduced to subsequent beams.}\label{fig:GeoSec-2}
+\end{figure}
+
+\begin{eqnarray}
+\Delta y_{2} &=& dK\sin{\beta}\\
+x_{p} &=& dK\cos(\beta) + \frac{dy_{2}}{\tan(30^{\circ})}\\
+y_{1} &=& (x_{2} + x_{p})\tan(30^{\circ})\\
+x_{3} &=& \frac{y_{1}}{\tan(75^{\circ})}\\
+B &=& \frac{y_{1}}{\sin(75^{\circ})}\\
+A &=& x_{3} + x_{p} + x_{2}\\
+C &=& \frac{x_{2} + x_{p}}{\cos(30^{\circ})}\\
+\Delta f &=& \frac{x_{p}B}{(A - x_{p})(1 + \frac{x_{p}}{A - x_{p}})}\\
+\Delta x_{2} &=& \Delta f\cos(75^{\circ})\\
+r_{3} &=& C - \frac{dy_{2}}{\sin(30^{\circ})}\\
+a &=&  A - x_{p}\\
+b &=&  B - \Delta f\\
+r_{4} &=& \sqrt{a^{2} + b^{2} - 2a\,b\cos(75^{\circ})}\\
+\Delta r_{1} &=& r_{1} - r_{2}\\
+\Delta r_{2} &=& r_{3} - r_{4}\\
+\Delta l &=& \Delta r_{1} + \Delta r_{2} - \Delta x_{2}
+\label{eq:eqn:geo2}
+\end{eqnarray}
+
+$\Delta l$ represents the total change in the path length of the second ray through the optical setup and is used to calculate how much earlier the the internal reflections will be measured than they would be expected to if only the travel distance through the sample were to be considered.
+
+\endinput
