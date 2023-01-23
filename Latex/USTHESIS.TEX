@@ -2,7 +2,7 @@
                afrikaans, english,%.............. Global language selection
                ]{memoir}
 
- \usepackage[masters-t,%.......................... Master thesis
+ \usepackage[PhD,%.......................... PhD dissertation
              goldenblock,%........................ A5 type block (or a5block or wide)
             ]{usthesis}%.......................... US thesis style with memoir
 
@@ -29,9 +29,10 @@
 
 %==== Ref's, Bib's and Nomencl ======================================
  \usepackage{usnomencl}%.......................... List of symbols (in usthesis pack)
- \usepackage{usbib}%.............................. Bibliography    (in usthesis pack)
+ \usepackage[sort&compress]{usbib}%.............................. Bibliography    (in usthesis pack)
     \bibliographystyle{usmeg-n}
     \renewcommand\bibfont{\small}
+%\usepackage{citesort}		
 %\usepackage{cite}
     %% For usmeg-a, the bib is a list of references. If you
     %% are using usmeg-n comment out the following lines
@@ -59,7 +60,7 @@
 %==== TITLE PAGE ====================================================
 \title{\bfseries
        \AorE{%-- Afrikaans ------------------------------------------
-             Ontwikkeling en karakterisering van 'n tyd verwante multi-antenna terahertz spektroskopie sisteem\\[1ex]
+             Ontwikkeling van 'n spektroskopiese teraherts tyd-verwante ellipsometer\\[1ex]
              \normalfont\small\itshape
              (``Construction of a spectroscopic terahertz time-domain ellipsometer'')
             }{%-- English -------------------------------------------
@@ -68,7 +69,7 @@
 
 \author{S.R.\ Smith}{Shane Raymond Smith}
 
-\degree{\AorE{MSc (Physics)}{MSc (Fisika)}}
+\degree{\AorE{PhD (Fisika)}{PhD (Physics)}}
        {\AorE{Doktoraat in die Natuurwetenskappe in Laser Fisika}
              {PhD of Science in Laser Physics}}
 
@@ -83,14 +84,15 @@
              }}
 \faculty{\AorE{Fakulteit Natuur Wetenskap}%
               {Faculty of Nature Science}}
-\studyleader{Dr.\ P.H.\ Neethling\ Co-supervisor:\ Prof.\  E.G.\ Rohwer}
-\setdate{3}{2015}
+\supervisor{Dr.\ P.H.\ Neethling} 
+\cosupervisor{Prof.\  E.G.\ Rohwer}
+\setdate{4}{2020}
 
 %====================================================================
 %     MAIN DOCUMENT
 %====================================================================
 \maxsecnumdepth{subsubsection}
-\maxtocdepth{subsection}
+\maxtocdepth{subsubsection}
 
 \begin{document}
 
@@ -112,7 +114,7 @@
  \listoffigures
  \clearpage
 
- \listoftables
+ %\listoftables
  \clearpage
 
  \include{frontmatter/Nomencl}
@@ -124,26 +126,20 @@
    \numberwithin{figure}{chapter}
    \numberwithin{table}{chapter}
 
-%\include{contents/Intro}
+\include{contents/introduction}
 \include{contents/theory}
 \include{contents/setup}
-%\include{contents/Tera}
 \include{contents/simulation}
 \include{contents/data_analysis}
-%\include{contents/ResDis2}
-%\include{contents/Conclusion2}
+\include{contents/results}
+\include{contents/conclusion}
 %==== Appendices ====================================================
 \appendix
 \appendixpage\relax
 
-%\include{contents/Auto2}
-%\include{contents/Telescope}
-%\include{contents/RLC}
-%\include{contents/Fourier}
-%\include{contents/Solvents}
-%\include{contents/Kuvet}
-
-%\include{contents/KnifeEdge}
+\include{contents/Knife-Edge}
+\include{contents/Allignment}
+\include{contents/DelayCalc}
 
 %==== Bibliography acro's & Index ===================================
 \backmatter
