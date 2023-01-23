@@ -1,0 +1,46 @@
+\chapter{Knife-Edge}
+\label{chp:KE}
+Knife-edge measurements are a rudimentary method for determining the size of a beam. As THz cameras don't exist, this method was employed to help characterize our beam.
+A knife-edge was translated in the path of the beam, along the x-axis, to determine the beam spot size. The electric field was measured at different points of the knife translation. This electric field was transformed to the frequency domain by FFT and the intensity of the light was calculated by $I(f) \approx E(f)E^{*}(f)$.
+
+The beam waist, $w$ ($\frac{1}{e^{2}}$ radius), is computed by fitting equation \ref{eq:Knife} to the measured data \cite{Marcos2009}.
+
+\begin{equation}
+I_{measured} = \frac{I_{0}}{2}\left[1 + erf\left(\frac{x_{0}-x}{w}\right)\right]
+\label{eq:Knife}
+\end{equation}
+
+Two different approaches were taken to calculate the beam waist from the calculated intensity.
+
+In the first approach, only the central frequency was considered in each measured data set. The central frequency intensity was plotted as a function of knife-edge translation and equation \ref{eq:Knife} was fit to it. This data and the resultant fit can be seen in figure \ref{fig:Knife_Cent}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/Knife_I_central.png}
+	 \caption[Knife-edge measurement and fitting when only the central frequency is considered.]{Knife-edge measurement and fitting of equation \ref{eq:Knife} on said data when only the central frequency is considered.}
+   \label{fig:Knife_Cent}
+\end{center}
+\end{figure}
+
+In the second approach, the data for the spectral region between $0.5$ and $2.0\,$THz was integrated over. The integrated intensity was plotted as a function of knife-edge translation and equation \ref{eq:Knife} was fit to it. This data and the resultant fit can be seen in figure \ref{fig:Knife_int}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/Knife_I_int.png}
+	 \caption[Knife-edge measurement and fitting when integrated spectrum is considered.]{Knife-edge measurement and fitting of equation \ref{eq:Knife} on said data when the integrated spectrum is considered.}
+   \label{fig:Knife_int}
+\end{center}
+\end{figure}
+
+Method one yielded a beam waist ($\frac{1}{e^{2}}$ radius) of $5.84\,(\pm 0.01)\,$mm and method two yielded a beam waist of $5.33\,(\pm 0.01)\,$mm. The reason for this is that the distribution of the frequency components are frequency dependent. As the knife-edge translates across the beam spot, at first the lower frequency components fall off faster than the higher frequency components, but as the knife-edge gets closer to the center of the beam, the higher frequency components start to rapidly fall off, as can be seen in figure \ref{fig:Knife_int_Spec}.
+
+\begin{figure}[H]
+\begin{center}
+	 \includegraphics[scale=0.6]{figs/KnifeFreqInt.png}
+	 \caption[Frequency domain data at different knife-edge translations.]{Normalized spectral intensity measured at different points along the knife-edge translation into the THz beam path.}
+   \label{fig:Knife_int_Spec}
+\end{center}
+\end{figure}
+
+This would suggest that the lower frequency components of our pulse are distributed further out on the beam spot than the higher frequency components.
+\endinput
