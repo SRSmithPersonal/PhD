@@ -1,0 +1,15 @@
+\chapter{Nelder-Mead algorithm}
+\label{chp:Nelder}
+
+The Nelder-Mead algorithm is a direct search algorithm used for minimizing real-valued functions. 
+
+Consider real-valued function $f(x)$ for $x \in R^{n}$. The Nelder-Mead algorithm requires four scalar parameters: coefficients of reflection, $\rho$, expansion, $\ki$, contraction, $\gamma$, and shrinkage, $\sigma$ \cite{Lagarias1998}.
+These parameters need to satisfy the following constraints:
+\begin{eqnarray}
+\rho &>& 0\\
+\ki &>& 1\\
+0 < &\gamma& < 1\\
+0 < &\sigma& < 1
+\label{eq:NelCo}
+\end{eqnarray}
+\endinput
