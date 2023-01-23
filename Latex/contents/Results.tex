@@ -1,0 +1,360 @@
+\chapter{Results and discussion}
+\label{chp:Results}
+
+The constructed time domain THz ellipsometer and the various data extractions techniques that were developed, were tested by performing measurements on appropriate samples, to illustrate the capabilities and determine the limitations of the constructed ellipsometer. At least one sample was measured for each data extraction technique discussed in section \ref{chp:Analysis}.
+
+\section{System transfer function measurement}
+\label{sec: Mir}
+
+In order to measure the system transfer function of the constructed system, a silver mirror was used as the sample. For this sample, reflection coefficients of $-0.999$ for s-polarized light and $0.997$ for p-polarised light are expected, as the complex refractive index for silver at ~$1\,$THz is $531 - 689i$ \cite{rii}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Mirror-t.png}
+\end{center}
+\caption[Time-domain measurement: Silver mirror]{\label{fig:MirrorE0t} Time-domain data measured for a silver mirror. The absorption lines present in the spectrum are from residual water vapour.}
+\end{figure}
+
+From the mirror measurements, as seen in figure \ref{fig:MirrorE0t}, and the simulation method, described in section \ref{chp:Simulation}, corrections to the amplitude and phase are calculated.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/Mirror-A.png}&
+                \includegraphics[scale=0.42]{figs/Mirror-P.png}
+								\end{array}$
+								\end{center}
+	\caption[FFT of measured mirror data]{The absolute amplitude and phase of the Fourier transforms of the data represented in figure \ref{fig:MirrorE0t}.}
+	\label{fig:MirrorFFT}
+\end{figure}
+
+The resonances present in the data FFT data, as seen in figure \ref{fig:MirrorFFT}, are from water vapour still present in the system. The path length through the system is $1.65\,$m, as a result it is difficult to remove all water from the environment.
+
+Simulated reflection coefficients ($\widetilde{r}_{s\, sim}(f)$ and $\widetilde{r}_{p\,sim}(f)$) are calculated by using the simulation technique from chapter \ref{chp:Simulation}. A flat complex refractive index of $531 - 689i$ was used. The ratio between $\widetilde{r}_{s\, sim}(f)$ and $\widetilde{r}_{p\, sim}(f)$ was taken and the absolute amplitude ($A_{simulated}$) and unwrapped phase ($\Delta\,P_{simulated}$) of this ratio was calculated. These values are then compared with those from the Fourier transformed data of the measurements, as seen in figure \ref{fig:MirrorFFT}.
+
+\begin{eqnarray}
+Cor_{A} = \frac{A_{measured}}{A_{simulated}}\\
+Cor_{P} = \Delta\,P_{measured} - \Delta\,P_{simulated}
+\label{eq:MirCor}
+\end{eqnarray}
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/CorA.png}&
+                \includegraphics[scale=0.42]{figs/CorP.png}
+								\end{array}$
+								\end{center}
+	\caption[Amplitude and phase correction factors]{The corrections to the amplitude, $Cor_A$, and phase, $Cor_P$, calculated for the data plotted in figure \ref{fig:MirrorFFT}}
+	\label{fig:MirrorCor}
+\end{figure}
+
+The correctional values for our system were calculated and can be seen in figure \ref{fig:MirrorCor}. These corrections represent the system transfer function, and can be used as a correction factor on measured data in order to eliminate the effect of the system on the final result.
+
+As these correctional values are dependent on the angle of incidence and the water vapour levels remaining in the system, new measurements on the mirrors were performed each day before sample measurements were taken and correction values were calculated for that day's data from these mirror measurements.
+
+These correctional values were applied to all data in the following sections during data extraction, except for the self-reference method, as this method only used p-polarized light.
+
+\section{Bulk isotropic sample: Thick float glass}
+\label{sec: Bulk_res}
+
+As discussed in section \ref{sec:BIM}, bulk isotropic samples are samples from which only a surface reflection is expected and internal reflections should not be present in the measured data.
+
+A $2.73\,$mm thick piece of float glass was measured in the setup. This sample was chosen due to fulfilling several criteria. We had extracted optical properties for the sample via a commercial THz transmission setup in the range $0.5\,$THz to $0.9\,$THz, thus the optical properties of the material were known for this range.  The range was limited due to the strong absorption of the sample at higher frequencies. Most importantly, the sample was of sufficient optical thickness, and as such did not allow for measurable internal reflections.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Bulk-tN.png}
+\end{center}
+\caption[Time-domain measurement: Bulk Glass, focused on pulse]{\label{fig:GlassBulkE0t} Time domain measurement of s- and p-polarized electric fields reflected from a $2.73\,$mm bulk float glass sample.}
+\end{figure}
+
+The data represented in figure \ref{fig:GlassBulkE0t} was analyzed via the bulk isotropic data extraction method, described in section \ref{sec:BIM}. The results can be seen in figure \ref{fig:BulkGlassExt}.
+
+%TODO:Mirror correction
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Bulk-n.png}&
+                \includegraphics[scale=0.5]{figs/Bulk-k.png}
+								\end{array}$
+								\end{center}
+	\caption[Extract complex refractive index of bulk glass sample]{The complex refractive index extracted from the data presented in figure \ref{fig:GlassBulkE0t} via the bulk isotropic data extraction technique (red curve) in comparison to THz transmission data (black curve).}
+	\label{fig:BulkGlassExt}
+\end{figure}
+
+The extracted complex refractive index values for the float glass sample matched the values extracted via the commercial transmission system (error between expected and extracted values is less than $2.8\,\%$), as can be seen when comparing the different data sets (red and black curves) in figure \ref{fig:BulkGlassExt}. The trend followed by the refractive index and extinction coefficient extracted by the ellipsometric system and transmission system bore high similarity to one another.  Due to strong absorption of the float glass, the ellipsometery measurements were able to measure the complex refractive index over a much wider frequency range than the transmission measurement ($0.5\,$THz to $2\,$THz compared to $0.5\,$THz to $0.9\,$THz).
+
+%\subsection{Wood?}
+%\label{sub: wood-glass}
+
+\section{Single layer isotropic}
+\label{sec: Single_res}
+
+Single layered isotropic samples, as discussed in section \ref{sec:SLM}, are dielectric samples which are non-depolarizing. These samples are of such a nature that measurable internal reflections occur in them. For these measurements a strongly absorbing thin sample of borosilicate glass, a highly transparent sample of undoped high resistivity silicon and a highly transparent sample of lightly n-type doped silicon were chosen.
+
+\subsection{Borosilicate Glass}
+\label{sub: glass}
+
+A $0.97\,$mm borosilicate glass sample was measured using our time domain THz ellipsometer. The extracted nonlinear refractive index is compared to the values obtained using a commercial THz-TDS transmissions spectrometer in the $0.5\,$THz to $1.4\,$THz region. As can be seen in figure \ref{fig:GlassSingleE0t} the sample displays a very weak internal reflection, barely noticeable in the time domain data.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Bulk-t-ThinN.png}
+\end{center}
+\caption[Time-domain measurement: Single layer glass, focused on pulse and internal reflection]{\label{fig:GlassSingleE0t} Time domain measurement of s- and p-polarized electric fields reflected from a $0.97\,$mm single layer glass sample.}
+\end{figure}
+
+The single layer data extraction method, as described in section \ref{sec:SLM}, was applied to the data represented in figure \ref{fig:GlassSingleE0t}. An initial thickness guess of $0.97\pm0.01\,$mm, as measured by vernier caliper with $10\,\mu$m accuracy, was used for the calculation. The extracted results are presented in figure \ref{fig:SingleGlassExt}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.5]{figs/Single-n-Thin.png}&
+                \includegraphics[scale=0.5]{figs/Single-k-Thin.png}
+								\end{array}$
+								\end{center}
+	\caption[Extract complex refractive index of single layer glass sample]{The complex refractive index extracted from the data presented in figure \ref{fig:GlassSingleE0t} via the single layer isotropic data extraction technique (red curve) in comparison to THz transmission data (black curve).}
+	\label{fig:SingleGlassExt}
+\end{figure}
+
+The single layer extraction method converged to a sample thickness of $0.964\,$mm, which is clearly within the error margin of the vernier caliper, and produced the complex refractive index displayed in figure \ref{fig:SingleGlassExt}. The complex refractive index extracted from the ellipsometry data agrees within $10\,\%$ of the values measured with the transmission spectrometer, in the range $0.5\,$THz to $1.4\,$THz. However, the ellipsometer was able to measure the complex refractive index for the interval $0.5\,$THz to $2.0\,$THz, where the optical density of sample limited the range in which the transmission spectrometer could reliably determine the complex refractive index of the borosilicate sample.
+
+\subsection{High resistivity silicon}
+\label{sub: HR-Silicon}
+
+High resistivity silicon has very well researched optical properties in the THz region \cite{Li-2008,Jepsen-2007,Grischkowsky1990}, thus it is ideal for testing the functionality of the system. 
+
+An undoped $500\,\mu$m thick silicon wafer was used as sample the in the THz ellipsometer and the complex refractive index was measured.  The measured data can be found in figure \ref{fig:SiliconSingleE0t}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/t_Sil.png}
+\end{center}
+\caption[Time-domain measurement: Single layer undoped silicon, focused on pulse and internal reflections]{\label{fig:SiliconSingleE0t} Time domain measurement of s- and p-polarized electric fields reflected from a $0.5\,$mm single layer undoped silicon sample.}
+\end{figure}
+
+The single layer ellipsometric data extraction technique is applied to the data presented in figure \ref{fig:SiliconSingleE0t}. The resultant complex refractive index which was extracted can be found in figure \ref{fig:SingleSilExt}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/n_Sil2.png}&
+                \includegraphics[scale=0.42]{figs/k_Sil2.png}
+								\end{array}$
+								\end{center}
+	\caption[Extract complex refractive index of single layer undoped silicon sample]{The complex refractive index extracted from the data presented in figure \ref{fig:SiliconSingleE0t} via the single layer isotropic data extraction technique (red curve) compared to the expected value (black line) from literature \cite{Li-2008,Jepsen-2007,Grischkowsky1990}.}
+	\label{fig:SingleSilExt}
+\end{figure}
+
+The sample is effectively transparent, as can be seen from the extinction coefficient in figure \ref{fig:SingleSilExt}. If we compare the real refractive index extracted by the single layer extraction method with data from literature \cite{Li-2008,Jepsen-2007,Grischkowsky1990} we find we have achieved a nominal average error of $0.18\%$. A spectral representation of our error can be found in figure \ref{fig:SiliconErr}. The extremely low extinction coefficient results in slightly larger errors when compared to literature values (average absolute difference of $0.003$), due to the difficulty of the extraction algorithm converging when the extinction coefficient is essentially zero.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Sil_er.png}
+\end{center}
+\caption[Error in data extracted for undoped silicon]{\label{fig:SiliconErr} The error found when comparing our extracted real refractive index with the value found in literature \cite{Li-2008,Jepsen-2007,Grischkowsky1990}.}
+\end{figure}
+
+The extracted extinction coefficient in figure \ref{fig:SingleSilExt} can be converted to the absorption coefficient by use of equation \ref{eq:abs}. The calculated absorption coefficient can be seen in figure \ref{fig:SiliconAb}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/a_Sil.png}
+\end{center}
+\caption[Extract absorption coefficient of single layer undoped silicon sample]{\label{fig:SiliconAb} The absorption coefficient calculated from the data presented in figure \ref{fig:SingleSilExt} via equation \ref{eq:abs} (red curve) compared to the expected value (black line) from literature \cite{Li-2008,Jepsen-2007,Grischkowsky1990}.}
+\end{figure}
+
+The extracted values found in figure \ref{fig:SingleSilExt} and figure \ref{fig:SiliconAb} can be compared to the THz ellipsometry results obtained by Xuequan \textit{et al} \cite{Xuequan2018}, which can be seen in figure \ref{fig:SiliconExLit}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1.5]{figs/Lit_Ellips_Sil.png}
+\end{center}
+\caption[Literature values of single layer undoped silicon sample]{\label{fig:SiliconExLit} The real refractive index and absorption coefficient of high resistivity silicon extracted by Xuequan \textit{et al} \cite{Xuequan2018}.}
+\end{figure}
+
+By comparing our extracted values with those extracted by the competing THz ellipsometry group, we find a very visible improvement in the accuracy of the extracted values, especially in the extracted absorption coefficient.
+
+\subsection{Lightly n-type doped silicon}
+\label{sub: n-Silicon}
+
+A measurement was performed on a doped silicon sample, to compare with the undoped silicon sample in section \ref{sub: HR-Silicon}. A lightly n-type doped silicon sample was chosen. The sample has a resistivity of $1800$-$2000\,\Omega$m and is $375\,\mu$m thick. The time domain data measured for this sample is displayed in figure \ref{fig:SiliconSingleDopedE0t}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Sil_Doped_Time.png}
+\end{center}
+\caption[Time domain measurement of lightly doped silicon]{\label{fig:SiliconSingleDopedE0t} p- and s-polarized electric fields reflected from a $375\mu$m n-type doped silicon sample with a resistivity of $1800$-$2000 \Omega$m.}
+\end{figure}
+
+The single layer extraction method was applied to the data displayed in figure \ref{fig:SiliconSingleDopedE0t} and the complex refractive index was extracted. The extracted data can be found in figure \ref{fig:SingleSilDopedExt}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/n_doped.png}&
+                \includegraphics[scale=0.42]{figs/k_doped.png}
+								\end{array}$
+								\end{center}
+	\caption[Extract complex refractive index of single layer n-doped silicon sample]{The complex refractive index extracted from the data of the n-doped silicon presented in figure \ref{fig:SiliconSingleDopedE0t} via the single layer isotropic data extraction technique (red curve) plotted with the same data for the undoped silicon sample (black curve).}
+	\label{fig:SingleSilDopedExt}
+\end{figure}
+
+As was expected, the extracted value for the real refractive index of the doped silicon sample was found to be higher than that of the undoped silicon sample \cite{Hangyo2002}. 
+We also found the doped silicon sample was still effectively transparent, as can be seen from the extinction coefficient in figure \ref{fig:SingleSilDopedExt}. 
+
+Figure \ref{fig:SingleSilDopedExt} also shows that even very lightly doped silicon samples can be distinguished from undoped silicon, showing the sensitivity of the real refractive index in the THz region on doping concentration. Our THz ellipsometer can easily measure these differences.
+
+As discussed in section \ref{sub:Error}, the angle of incidence needs to be measured to an accuracy of $0.002^{\circ}$, and the thickness needs to be calculated to an accuracy of $20\,$nm, for the extinction coefficient of highly transparent samples, such as these, to be extracted with an accuracy $>90\%$. This is currently not possible with our setup.
+
+These limitations in extracting the extinction coefficient are only an issue when considering transparent samples, as can be seen in section \ref{sub: glass} and is discussed in section \ref{sub:Error}. The limitations set by these errors are also far less strenuous for the real refractive index, as seen in these measurements, and discussed in section \ref{sub:Error}.
+
+\section{Single layer isotropic medium followed by bulk isotropic sample}
+\label{sec: Duo_res}
+
+Aqueous samples are of great interest in the THz region \cite{B804734K, Novelli2017, Sun2014}. In order to measure these samples, they need to be contained in a sample holder, requiring the THz radiation to first pass through a window material before encountering the aqueous sample.   We prepared a number of different samples of different concentrations of water and ethanol. These samples were measured and analyzed using both ellipsometric data extraction and self-referencing data extraction techniques.  The extracted complex refractive indexes could be compared to those found in literature \cite{Jepsen-2007, Kindt1996, Ronne1997, Barthel1990}.
+
+%\section{High resistivity silicon cuvette filled with water}
+%\label{sub: HR-Silicon-Water}
+
+%High resistivity silicon was chosen as an ideal candidate for the cuvette material, due to its flat refractive index and low absorption in the THz region.
+
+%Water is known for its strong absorption in the THz region and is very difficult to measure in a transmission setup \cite{Thrane1995}.
+
+\subsection{High resistivity silicon cuvette filled with water-ethanol mixture}
+\label{sub: HR-Silicon-Water-Eth}
+
+Examining liquid samples was the original motivation for the development of this system. These samples require a container to mount them in the beam path.
+High resistivity silicon was chosen as an ideal candidate for the window material of the cuvette due to its flat refractive index and low absorption in the THz region. We developed an undoped silicon cuvette, which can be seen in figure \ref{fig:CuvettePhoto}, to house our sample which can easily be mounted in our setup. It consists of a $500\,\mu$m thick silicon window and a $6\,$ml polypropylene chamber. The path length through the cuvette is $4\,$mm, ensuring that no further internal reflection will reach the detector due to the strong absorption of water in the THz region.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.8]{figs/Cuvette1.png}&
+                \includegraphics[scale=0.8]{figs/Cuvette2.png}
+								\end{array}$
+								\end{center}
+	\caption[Photos of Silicon cuvette]{Two photos (front and back sides) of the silicon cuvette we developed for use in our setup.}
+	\label{fig:CuvettePhoto}
+\end{figure}
+
+Samples of $0\,\%$, $10\,\%$, $30\,\%$ and $40\,\%$ ethanol in water were prepared. These samples were alternately placed in the silicon cuvette and the time domain THz ellipsometry data was collected for each sample using our THz ellipsometer.  These measurements can be seen in figure \ref{fig:CuvetteMesTime}.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/P_Time_2Layer.png}&
+                \includegraphics[scale=0.42]{figs/S_Time_2Layer.png}
+								\end{array}$
+								\end{center}
+	\caption[Time domain cuvette measurements]{In (a) the measured time-domain electric field for the p-polarization can be seen and in (b) the measured time-domain electric field for the s-polarization can be seen. The measurements were conducted for the empty cuvette (denoted as silicon), distilled water, and a $10\%$, $30\%$ and $40\%$ ethanol-water solution.}
+	\label{fig:CuvetteMesTime}
+\end{figure}
+
+In the following subsections the data displayed in figure \ref{fig:CuvetteMesTime} was analyzed via the two layer ellipsometric method, as discussed in section \ref{sub:DLM}, and the self-reference method, as discussed in section \ref{sub:Self}. 
+
+\subsubsection{Ellipsometry}
+\label{sub: HR-Silicon-Water-Eth_ellips}
+
+The ellipsometric model for a two layer system, consisting of a single layer isotropic dielectric initial layer and a bulk isotropic second layer, as discussed in section \ref{sub:DLM}, was applied to the measured data displayed in figure \ref{fig:CuvetteMesTime}. Via this method the complex refractive index was extracted for the liquid samples.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/n_Ellips_2_layer.png}&
+                \includegraphics[scale=0.42]{figs/k_Ellips_2_layer.png}
+								\end{array}$
+								\end{center}
+	\caption[$2$ layer ellipsometry extracted complex refractive index]{The complex refractive index extracted via the method described in section \ref{sub:DLM} from the data presented in figure \ref{fig:CuvetteMesTime}.}
+	\label{fig:CuvetteRefEllips}
+\end{figure}
+
+As seen in figure \ref{fig:CuvetteRefEllips}, a clear difference can be seen in both the extinction coefficient and real refractive index extracted for each sample. As can be seen, both components of the complex refractive index decrease as the ethanol concentration increases. This is in agreement with the results produced by Jepsen \textit{et al.} \cite{Jepsen-2007}.
+
+\subsubsection{Self-reference}
+\label{sub: HR-Silicon-Water-Eth_self}
+The self-reference method allows for data extraction from data measured from a two layered system. This method was discussed in section \ref{sub:Self}. This method was applied to the data presented in figure \ref{fig:CuvetteMesTime} to extract the complex refractive indexes for the different samples represented. Only the p-polarized electric fields were used during this section.
+
+
+By applying the data extraction method discussed in section \ref{sub:Self}, the real refractive indexes and extinction coefficients of the samples represented by the data in figure \ref{fig:CuvetteRefEllips} (a) were extracted. The empty cuvette, represented in figure \ref{fig:CuvetteRefEllips} (a) by "Silicon", is used as the reference when calculating the complex refractive indexes.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/n_SelfRefP_2_layer.png}&
+                \includegraphics[scale=0.42]{figs/k_SelfRefP_2_layer.png}
+								\end{array}$
+								\end{center}
+	\caption[Comparative n for two layer system]{The real refractive index extracted via the ellipsometric method and the real refractive index extracted via the self-reference method.}
+	\label{fig:Comp_n_2_layer}
+\end{figure}
+
+Similar to the results in section \ref{sub: HR-Silicon-Water-Eth_ellips}, it was found that both components of the complex refractive index decrease as the concentration of ethanol increases.
+
+\subsubsection{Discussion}
+\label{sub: 2-LayerDisc}
+
+Both the ellipsometric method, section \ref{sub: HR-Silicon-Water-Eth_ellips}, and self-reference method, section \ref{sub: HR-Silicon-Water-Eth_self}, exhibited similar behavior. As the concentration of ethanol in the solution was increased, the extracted complex refractive index of the solution decreased. This was also in agreement with previous work done by Jepsen \textit{et al} \cite{Jepsen-2007}.
+
+The value extracted for the real refractive index by the ellipsometric method is rather lower than the value extracted by the self-reference method. 
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/n_Ellips_2_layer.png}&
+                \includegraphics[scale=0.42]{figs/n_SelfRefP_2_layer.png}
+								\end{array}$
+								\end{center}
+	\caption[$2$ layer self-reference extracted complex refractive index]{The complex refractive index extracted via the method described in section \ref{sub:Self} from the data presented in figure \ref{fig:CuvetteRefEllips} (a).}
+	\label{fig:CuvetteRefSelf}
+\end{figure}
+
+The average difference between the real refractive indexes extracted by the ellipsometric method and self-reference method was $6$-$15\,\%$, increasing as the concentration of ethanol increased. These differences can arise from small path length differences that get introduced when rotating between S and P polarization measurements. These small path length differences will play no role in the self referencing method as the only the p-polarization measurement is used.
+
+If we convert the complex refractive index extracted for water to the complex dielectric constant ($\widetilde{\epsilon} = (n - i\kappa)^{2}$), we can compare it to data previously extracted by Kindt \textit{et al} \cite{Kindt1996}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Del_Ellip_er.png}
+\end{center}
+\caption[Dielectric constant error two layer system - ellipsometry]{\label{fig:DelErEll} The percentage difference in the complex dielectric constant extracted extracted via the ellipsometric method compared to data extracted by Kindt \textit{et al} \cite{Kindt1996} for water.}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{figs/Del_Self_er.png}
+\end{center}
+\caption[Dielectric constant error two layer system - self-reference]{\label{fig:DelErSelf} The percentage difference in the complex dielectric constant extracted extracted via the self-reference method compared to data extracted by Kindt \textit{et al} \cite{Kindt1996} for water.}
+\end{figure}
+
+The average difference between the results produced by the self-reference and the data extracted by Kindt \textit{et al} is $7.8\,\%$ for the real dielectric constant and $16.7\,\%$ for the imaginary dielectric constant. The average difference between the results produced by the ellipsometric method and the data extracted by Kindt \textit{et al} is $10.5\,\%$ for the real dielectric constant and $10.7\,\%$ for the imaginary dielectric constant.
+
+\begin{figure}[H]
+                \begin{center}$
+								\begin{array}{cc}
+                \includegraphics[scale=0.42]{figs/er_Comp.png}&
+                \includegraphics[scale=0.42]{figs/ei_Comp.png}
+								\end{array}$
+								\end{center}
+	\caption[Comparative complex dielectric constant]{The complex dielectric constant of water extracted via ellipsometry and the self-reference method and compared to values previously extracted by Jepsen \textit{et al} \cite{Jepsen-2007}, Kindt \textit{et al} \cite{Kindt1996}, Ronne \textit{et al} \cite{Ronne1997} and Barthel \textit{et al} \cite{Barthel1990}.}
+	\label{fig:CuvetteDiaComp}
+\end{figure}
+
+The real dielectric constant extracted via the ellipsometric method is very similar to the previously extracted values until $0.9\,$THz and then rapidly diverges from values published in literature, as seen in figure \ref{fig:CuvetteDiaComp}. 
+The imaginary dielectric constant extracted via the ellipsometric method shows a different trend to those of published values, however the mean value agrees fairly well.
+The real dielectric constant extracted via the self-reference method is very similar to the values extracted by Barthel \textit{et al} \cite{Barthel1990}.
+The imaginary dielectric constant extracted via the self-reference method is somewhat lower than the previously extracted values at low frequencies and has a lower gradient than the previously extracted values.
+\paragraph{}
+A potential cause for the difference between the values extracted by the self-reference method and ellipsometric method is that the travel path of the light changes as the system is rotated from p- to s-orientation. This could introduce a change in the angle of incidence of the light reflected at s-polarization, which in turn would affect the resultant data. Alternatively, the presence of absorption resonances can be the reason for these differences. As discussed in section \ref{sub:Cmp2}, these two methods produce different results when resonances are present. These resonance based effects could potentially be from water vapour still present in the chamber and not from the sample. Any water vapour resonances still present in the data would be removed in the self-reference case, as an inherent effect of how its correctional values are calculated. In the ellipsometric extraction method the remaining water vapour resonances would not be removed, but instead propagated through the complex refractive index calculated for the first layer of the cuvette. 
+
+The literature values extracted for liquid water show a lot of variance. The complex dielectric constant extracted by the self-reference method has a similar trend to data produced by Barthel \textit{et al} \cite{Barthel1990}, where as the complex dielectric constant extracted by the ellipsometric method shows a rather different trend to those in literature, thus warranting further investigation.
+
+As it currently stands, the self-reference method appears to be a more reliable method to use with our setup, when compared to the two-layer ellipsometric method, as it is resilient to water vapour resonances still present in the data and is resistant to errors introduced by changing between samples. 
+
+
+%A potential source for the error in both cases is that the beam is partially being reflected from the polypropylene which the cuvette is made from. This would be more prominent in the lower frequency components of the pulse, as these components effectively have a larger beam size than the higher frequency components, as seen in section \ref{chp:KE}.
+
+%----------------------------------------------------------------------------
+\endinput
